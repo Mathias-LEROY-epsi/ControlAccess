@@ -14,6 +14,6 @@ public class PorteSpy implements PorteInterface {
 
     @Override
     public void Ouvrir() {
-        _ouvertureDemandée = true;
+        _ouvertureDemandée = false;
     }
 }
