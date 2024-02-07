@@ -36,6 +36,7 @@ public class ControleAccesTest {
 
         // QUAND un badge bloqué est passé devant le lecteur
         lecteurFake.SimulerDétectionBadge();
+        lecteurFake.SimulerBlocageBadge();
 
         // ET que ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
