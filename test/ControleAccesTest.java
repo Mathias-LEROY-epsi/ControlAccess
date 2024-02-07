@@ -29,14 +29,14 @@ public class ControleAccesTest {
     }
 
     @Test
-    void CasNominalBadgeBloqué() {
+    void CasBadgeBloqué() {
         // ETANT DONNE un lecteur relié à une porte
         var porteSpy = new PorteSpy();
         var lecteurFake = new LecteurFake(porteSpy);
 
         // QUAND un badge bloqué est passé devant le lecteur
         lecteurFake.SimulerDétectionBadge();
-        lecteurFake.SimulerBlocageBadge();
+        lecteurFake.SimulerBloquageDuBadge();
 
         // ET que ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -46,20 +46,20 @@ public class ControleAccesTest {
     }
 
     @Test
-    void CasNominalBadgeBloquéPuisDébloqué() {
+    void CasBadgeBloquéPuisDébloqué() {
         // ETANT DONNE un lecteur relié à une porte
         var porteSpy = new PorteSpy();
         var lecteurFake = new LecteurFake(porteSpy);
 
-        // QUAND un badge bloqué est passé devant le lecteur
+        // QUAND un badge bloqué puis débloqué est passé devant le lecteur
         lecteurFake.SimulerDétectionBadge();
-        lecteurFake.SimulerBlocageBadge();
-        lecteurFake.SimulerBlocageBadge();
+        lecteurFake.SimulerBloquageDuBadge();
+        lecteurFake.SimulerDébloquageDuBadge();
 
         // ET que ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
-        // ALORS la porte n'est pas deverrouillée
+        // ALORS la porte est deverrouillée
         assertTrue(porteSpy.VérifierOuvertureDemandée());
     }
 

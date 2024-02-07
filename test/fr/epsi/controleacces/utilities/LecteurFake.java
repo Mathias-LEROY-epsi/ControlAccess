@@ -11,8 +11,12 @@ public class LecteurFake implements LecteurInterface {
         _aDétectéBadge = true;
     }
 
-    public void SimulerBlocageBadge() {
-        _badgeBloqué = !_badgeBloqué;
+    public void SimulerBloquageDuBadge() {
+        _badgeBloqué = true;
+    }
+
+    public void SimulerDébloquageDuBadge() {
+        _badgeBloqué = false;
     }
     @Override
     public boolean ADétectéBadge() {
@@ -20,7 +24,7 @@ public class LecteurFake implements LecteurInterface {
     }
 
     @Override
-    public boolean BadgeBloqué() {
+    public boolean ValiditeDuBadge() {
        return _badgeBloqué;
     }
 
