@@ -57,4 +57,23 @@ public class ControleAccesTest {
         // ALORS la porte n'est pas deverrouillée
         assertFalse(porteSpy.VérifierOuvertureDemandée());
     }
+
+    @Test
+    public void CasPlusieursPortes(){
+        // ETANT DONNE un lecteur relié à deux portes
+        var lecteurFake = new LecteurFake();
+        var porteSpy1 = new PorteSpy(lecteurFake);
+        var porteSpy2 = new PorteSpy(lecteurFake);
+        var moteurOuverture = new MoteurOuverture(porteSpy1, porteSpy2);
+
+        // QUAND un badge est passé devant le lecteur
+        lecteurFake.SimulerDétectionBadge();
+
+        // ET que ce lecteur est interrogé
+        moteurOuverture.InterrogerLecteur(lecteurFake);
+
+        // ALORS les portes sont deverrouillées
+        assertTrue(porteSpy1.VérifierOuvertureDemandée());
+        assertTrue(porteSpy2.VérifierOuvertureDemandée());
+    }
 }
