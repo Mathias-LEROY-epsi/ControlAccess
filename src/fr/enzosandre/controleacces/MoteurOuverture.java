@@ -8,6 +8,7 @@ public class MoteurOuverture {
     }
 
     public void InterrogerLecteur(LecteurInterface lecteur) {
-        _porte.Ouvrir();
+        if(lecteur.ADétectéBadge())
+            _porte.Ouvrir();
     }
 }

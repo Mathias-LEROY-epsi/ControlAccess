@@ -43,4 +43,18 @@ public class ControleAccesTest {
         // ALORS la porte n'est pas deverrouillée
         assertFalse(porteSpy.VérifierOuvertureDemandée());
     }
+
+    @Test
+    public void CasSansDétection(){
+        // ETANT DONNE un lecteur relié à une porte
+        var lecteurFake = new LecteurFake();
+        var porteSpy = new PorteSpy(lecteurFake);
+        var moteurOuverture = new MoteurOuverture(porteSpy);
+
+        // QUAND on interroge ce lecteur sans qu'il ait détecté un badge
+        moteurOuverture.InterrogerLecteur(lecteurFake);
+
+        // ALORS la porte n'est pas deverrouillée
+        assertFalse(porteSpy.VérifierOuvertureDemandée());
+    }
 }
