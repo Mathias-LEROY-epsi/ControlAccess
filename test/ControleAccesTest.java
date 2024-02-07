@@ -77,6 +77,24 @@ public class ControleAccesTest {
     }
 
     @Test
+    void CasPlusieursInterrogations(){
+        // ETANT DONNE un lecteur relié à une porte
+        var porteSpy = new PorteSpy();
+        var lecteurFake = new LecteurFake(porteSpy);
+
+        // QUAND un badge est présenté
+        lecteurFake.SimulerDétectionBadge();
+
+        // ET que ce lecteur est interrogé deux fois
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte n'est pas deverrouillée
+        assertTrue(porteSpy.VérifierOuvertureDemandée());
+        assertFalse(porteSpy.VérifierOuvertureDemandée());
+    }
+
+    @Test
     void CasSansDétection(){
         // ETANT DONNE un lecteur relié à une porte
         var porteSpy = new PorteSpy();
