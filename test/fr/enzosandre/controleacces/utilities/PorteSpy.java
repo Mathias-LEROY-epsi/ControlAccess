@@ -5,7 +5,7 @@ import fr.enzosandre.controleacces.PorteInterface;
 import jdk.jshell.spi.ExecutionControl;
 
 public class PorteSpy implements PorteInterface {
-    public PorteSpy(LecteurInterface lecteur){
+    public PorteSpy(){
     }
 
     private boolean _ouvertureDemandée = false;

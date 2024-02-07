@@ -7,10 +7,11 @@ public class MoteurOuverture {
         this._porte = porte;
     }
 
-    public void InterrogerLecteur(LecteurInterface lecteur) {
-        if(lecteur.ADétectéBadge()) {
-            for(var porte : _porte)
-                porte.Ouvrir();
-        }
+    public void InterrogerLecteurs(LecteurInterface... lecteurs) {
+        for(var lecteur : lecteurs)
+            if(lecteur.ADétectéBadge()) {
+                for(var porte : _porte)
+                    porte.Ouvrir();
+            }
     }
 }
