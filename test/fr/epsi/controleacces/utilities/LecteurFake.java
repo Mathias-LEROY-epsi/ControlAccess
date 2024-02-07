@@ -10,9 +10,9 @@ public class LecteurFake implements LecteurInterface {
     public void SimulerDétectionBadge() {
         _aDétectéBadge = true;
     }
-    
+
     public void SimulerBlocageBadge() {
-        _badgeBloqué = true;
+        _badgeBloqué = !_badgeBloqué;
     }
     @Override
     public boolean ADétectéBadge() {
