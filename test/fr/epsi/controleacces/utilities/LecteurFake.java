@@ -1,17 +1,14 @@
-package fr.enzosandre.controleacces.utilities;
+package fr.epsi.controleacces.utilities;
 
-import fr.enzosandre.controleacces.LecteurInterface;
-import fr.enzosandre.controleacces.PorteInterface;
+import fr.epsi.controleacces.LecteurInterface;
+import fr.epsi.controleacces.PorteInterface;
 
 public class LecteurFake implements LecteurInterface {
     private final PorteInterface[] _portes;
-
+    private boolean _aDétectéBadge = false;
     public void SimulerDétectionBadge() {
         _aDétectéBadge = true;
     }
-
-    private boolean _aDétectéBadge = false;
-
     @Override
     public boolean ADétectéBadge() {
         return _aDétectéBadge;

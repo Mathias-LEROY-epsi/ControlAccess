@@ -1,6 +1,6 @@
-import fr.enzosandre.controleacces.MoteurOuverture;
-import fr.enzosandre.controleacces.utilities.LecteurFake;
-import fr.enzosandre.controleacces.utilities.PorteSpy;
+import fr.epsi.controleacces.MoteurOuverture;
+import fr.epsi.controleacces.utilities.LecteurFake;
+import fr.epsi.controleacces.utilities.PorteSpy;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ControleAccesTest {
     @Test
-    public void TestOk(){
+    void TestOk(){
         assertTrue(true);
     }
 
     @Test
-    public void CasNominal() {
+    void CasNominal() {
         // ETANT DONNE un lecteur relié à une porte
         var porteSpy = new PorteSpy();
         var lecteurFake = new LecteurFake(porteSpy);
@@ -29,7 +29,23 @@ public class ControleAccesTest {
     }
 
     @Test
-    public void CasSansInterrogation(){
+    void CasNominalBadgeBloqué() {
+        // ETANT DONNE un lecteur relié à une porte
+        var porteSpy = new PorteSpy();
+        var lecteurFake = new LecteurFake(porteSpy);
+
+        // QUAND un badge bloqué est passé devant le lecteur
+        lecteurFake.SimulerDétectionBadge();
+
+        // ET que ce lecteur est interrogé
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte n'est pas deverrouillée
+        assertFalse(porteSpy.VérifierOuvertureDemandée());
+    }
+
+    @Test
+    void CasSansInterrogation(){
         // ETANT DONNE un lecteur relié à une porte
         var porteSpy = new PorteSpy();
         var lecteurFake = new LecteurFake(porteSpy);
@@ -42,7 +58,7 @@ public class ControleAccesTest {
     }
 
     @Test
-    public void CasSansDétection(){
+    void CasSansDétection(){
         // ETANT DONNE un lecteur relié à une porte
         var porteSpy = new PorteSpy();
         var lecteurFake = new LecteurFake(porteSpy);
@@ -55,7 +71,7 @@ public class ControleAccesTest {
     }
 
     @Test
-    public void CasPlusieursPortes(){
+    void CasPlusieursPortes(){
         // ETANT DONNE un lecteur relié à deux portes
         var porteSpy1 = new PorteSpy();
         var porteSpy2 = new PorteSpy();
@@ -73,7 +89,7 @@ public class ControleAccesTest {
     }
 
     @Test
-    public void CasPlusieursLecteurs() {
+    void CasPlusieursLecteurs() {
         // ETANT DONNE plusieurs lecteurs reliés à une porte
         var porteSpy = new PorteSpy();
         var lecteurFake1 = new LecteurFake(porteSpy);
@@ -90,7 +106,7 @@ public class ControleAccesTest {
     }
 
     @Test
-    public void CasPlusieursLecteursPlusieursPortes() {
+    void CasPlusieursLecteursPlusieursPortes() {
         // ETANT DONNE plusieurs lecteurs reliés chacun à leur porte
         var porteSpy1 = new PorteSpy();
         var porteSpy2 = new PorteSpy();
