@@ -1,8 +1,10 @@
 import fr.epsi.controleacces.MoteurOuverture;
 import fr.epsi.controleacces.utilities.Badge;
-import fr.epsi.controleacces.utilities.lecteurFake;
+import fr.epsi.controleacces.utilities.LecteurFake;
+import fr.epsi.controleacces.utilities.PorteFake;
 import fr.epsi.controleacces.utilities.PorteSpy;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,8 +17,8 @@ public class ControleAccesTest {
     @Test
     void CasNominal() {
         // ETANT DONNE un lecteur relié à une porte
-        var porteSpy = new PorteSpy();
-        var lecteurFake = new lecteurFake(porteSpy);
+        var porteSpy = new PorteSpy(new PorteFake(false));
+        var lecteurFake = new LecteurFake(porteSpy);
         var badge = new Badge(false);
 
         // QUAND un badge est passé devant le lecteur
@@ -32,8 +34,8 @@ public class ControleAccesTest {
     @Test
     void CasBadgeBloqué() {
         // ETANT DONNE un lecteur relié à une porte
-        var porteSpy = new PorteSpy();
-        var lecteurFake = new lecteurFake(porteSpy);
+        var porteSpy = new PorteSpy(new PorteFake(false));
+        var lecteurFake = new LecteurFake(porteSpy);
         var badge = new Badge(true);
 
         // QUAND un badge bloqué est passé devant le lecteur
@@ -49,8 +51,8 @@ public class ControleAccesTest {
     @Test
     void CasBadgeBloquéPuisDébloqué() {
         // ETANT DONNE un lecteur relié à une porte
-        var porteSpy = new PorteSpy();
-        var lecteurFake = new lecteurFake(porteSpy);
+        var porteSpy = new PorteSpy(new PorteFake(false));
+        var lecteurFake = new LecteurFake(porteSpy);
         var badgeBloqué = new Badge(true);
         var badgeDébloqué = new Badge(false);
 
@@ -68,8 +70,8 @@ public class ControleAccesTest {
     @Test
     void CasSansInterrogation(){
         // ETANT DONNE un lecteur relié à une porte
-        var porteSpy = new PorteSpy();
-        var lecteurFake = new lecteurFake(porteSpy);
+        var porteSpy = new PorteSpy(new PorteFake(false));
+        var lecteurFake = new LecteurFake(porteSpy);
         var badge = new Badge(false);
 
         // QUAND un badge est passé devant le lecteur sans que le lecteur ne soit interrogé
@@ -82,8 +84,8 @@ public class ControleAccesTest {
     @Test
     void CasPlusieursInterrogations(){
         // ETANT DONNE un lecteur relié à une porte
-        var porteSpy = new PorteSpy();
-        var lecteurFake = new lecteurFake(porteSpy);
+        var porteSpy = new PorteSpy(new PorteFake(false));
+        var lecteurFake = new LecteurFake(porteSpy);
         var badge = new Badge(false);
 
         // QUAND un badge est présenté
@@ -100,8 +102,8 @@ public class ControleAccesTest {
     @Test
     void CasSansDétection(){
         // ETANT DONNE un lecteur relié à une porte
-        var porteSpy = new PorteSpy();
-        var lecteurFake = new lecteurFake(porteSpy);
+        var porteSpy = new PorteSpy(new PorteFake(false));
+        var lecteurFake = new LecteurFake(porteSpy);
 
         // QUAND on interroge ce lecteur sans qu'il ait détecté un badge
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -111,10 +113,10 @@ public class ControleAccesTest {
     }
 
     @Test
-    void CasPorteBloqué() {
+    void CasPorteBloquée() {
         // ETANT DONNE une porte bloquée
-        var porteSpy = new PorteSpy();
-        var lecteurFake = new lecteurFake(porteSpy);
+        var porteSpy = new PorteSpy(new PorteFake(true));
+        var lecteurFake = new LecteurFake(porteSpy);
         var badge = new Badge(false);
 
         // QUAND un badge est présenté
@@ -130,9 +132,9 @@ public class ControleAccesTest {
     @Test
     void CasPlusieursPortes(){
         // ETANT DONNE un lecteur relié à deux portes
-        var porteSpy1 = new PorteSpy();
-        var porteSpy2 = new PorteSpy();
-        var lecteurFake = new lecteurFake(porteSpy1, porteSpy2);
+        var porteSpy1 = new PorteSpy(new PorteFake(false));
+        var porteSpy2 = new PorteSpy(new PorteFake(false));
+        var lecteurFake = new LecteurFake(porteSpy1, porteSpy2);
         var badge = new Badge(false);
 
         // QUAND un badge est passé devant le lecteur
@@ -149,9 +151,9 @@ public class ControleAccesTest {
     @Test
     void CasPlusieursLecteurs() {
         // ETANT DONNE plusieurs lecteurs reliés à une porte
-        var porteSpy = new PorteSpy();
-        var lecteurFake1 = new lecteurFake(porteSpy);
-        var lecteurFake2 = new lecteurFake(porteSpy);
+        var porteSpy = new PorteSpy(new PorteFake(false));
+        var lecteurFake1 = new LecteurFake(porteSpy);
+        var lecteurFake2 = new LecteurFake(porteSpy);
         var badge = new Badge(false);
 
         // QUAND un badge est passé devant le deuxième lecteur
@@ -167,10 +169,10 @@ public class ControleAccesTest {
     @Test
     void CasPlusieursLecteursPlusieursPortes() {
         // ETANT DONNE plusieurs lecteurs reliés chacun à leur porte
-        var porteSpy1 = new PorteSpy();
-        var porteSpy2 = new PorteSpy();
-        var lecteurFake1 = new lecteurFake(porteSpy1);
-        var lecteurFake2 = new lecteurFake(porteSpy2);
+        var porteSpy1 = new PorteSpy(new PorteFake(false));
+        var porteSpy2 = new PorteSpy(new PorteFake(false));
+        var lecteurFake1 = new LecteurFake(porteSpy1);
+        var lecteurFake2 = new LecteurFake(porteSpy2);
         var badge = new Badge(false);
 
         // QUAND un badge est passé devant le deuxième lecteur
