@@ -5,7 +5,7 @@ public class MoteurOuverture {
         for(var lecteur : lecteurs)
             if(lecteur.aDétectéBadge() && !lecteur.badgeBloqué())
                 for(var porte : lecteur.getPortes())
-                    if(!lecteur.porteBloquée())
+                    if(!porte.EstBloquée())
                         porte.Ouvrir();
     }
 }

@@ -7,15 +7,10 @@ public class LecteurFake implements LecteurInterface {
     private final PorteInterface[] _portes;
     private boolean _aDétectéBadge = false;
     private boolean _badgeBloqué = false;
-    private boolean _porteBloquée = false;
 
     public void simulerDétectionBadge(Badge badge) {
         _aDétectéBadge = true;
         _badgeBloqué = badge.estBloqué;
-    }
-
-    public void simulerBloquagePorte(PorteSpy porte) {
-        _porteBloquée = porte.EstBloquée();
     }
 
     @Override
@@ -28,11 +23,6 @@ public class LecteurFake implements LecteurInterface {
     @Override
     public boolean badgeBloqué() {
        return _badgeBloqué;
-    }
-
-    @Override
-    public boolean porteBloquée() {
-        return _porteBloquée;
     }
 
     public LecteurFake(PorteInterface... portesLiées) {
