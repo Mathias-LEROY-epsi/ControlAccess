@@ -51,17 +51,9 @@ QUAND un badge est présenté
 ET que le lecteur est interrogé  
 ALORS la porte ne s'ouvre pas
 
-ETANT DONNE deux portes bloquées  
-QUAND un badge est présenté à chaque porte  
-ET que le lecteur est interrogé pour chaque porte  
-ALORS les deux portes ne s'ouvrent pas
+(✅) Le test précédent valide indirectement les tests liés sur le blocage de plusieurs portes
 
-ETANT DONNE une porte bloqué puis débloquée  
+ETANT DONNE un lecteur relié à deux portes dont une bloquée 
 QUAND un badge est présenté  
 ET que le lecteur est interrogé  
-ALORS la porte s'ouvre
-
-ETANT DONNE une porte bloquée et une porte débloquée  
-QUAND un badge est présenté à chaque porte  
-ET que le lecteur est interrogé pour chaque porte  
-ALORS seule la deuxième porte s'ouvre
+ALORS seule la porte bloquée ne s'ouvre pas

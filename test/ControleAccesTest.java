@@ -157,6 +157,27 @@ public class ControleAccesTest {
     }
 
     @Test
+    void CasPlusieursPortesDontUneBloquée(){
+        // ETANT DONNE un lecteur relié à deux portes dont une bloquée
+        var porteSpy1 = new PorteSpy(new PorteFake(false));
+        var porteSpy2 = new PorteSpy(new PorteFake(true));
+        var lecteurFake = new LecteurFake(porteSpy1, porteSpy2);
+        var badge = new Badge(false);
+
+        // QUAND un badge est passé devant le lecteur
+        lecteurFake.simulerDétectionBadge(badge);
+        lecteurFake.simulerBloquagePorte(porteSpy1);
+        lecteurFake.simulerBloquagePorte(porteSpy2);
+
+        // ET que ce lecteur est interrogé
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS seule la porte bloquée ne s'ouvre pas
+        assertEquals(1, porteSpy1.VérifierOuvertureDemandée());
+        assertEquals(0, porteSpy2.VérifierOuvertureDemandée());
+    }
+
+    @Test
     void CasPlusieursLecteurs() {
         // ETANT DONNE plusieurs lecteurs reliés à une porte
         var porteSpy = new PorteSpy(new PorteFake(false));
@@ -194,7 +215,7 @@ public class ControleAccesTest {
         MoteurOuverture.InterrogerLecteurs(lecteurFake1, lecteurFake2);
 
         // ALORS seule la deuxième porte s'ouvre
-        assertEquals(1, porteSpy2.VérifierOuvertureDemandée());
         assertEquals(0, porteSpy1.VérifierOuvertureDemandée());
+        assertEquals(1, porteSpy2.VérifierOuvertureDemandée());
     }
 }
