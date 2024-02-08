@@ -4,7 +4,6 @@ import fr.epsi.controleacces.utilities.LecteurFake;
 import fr.epsi.controleacces.utilities.PorteFake;
 import fr.epsi.controleacces.utilities.PorteSpy;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,6 +22,7 @@ public class ControleAccesTest {
 
         // QUAND un badge est passé devant le lecteur
         lecteurFake.simulerDétectionBadge(badge);
+        lecteurFake.simulerBloquagePorte(porteSpy);
 
         // ET que ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -40,6 +40,7 @@ public class ControleAccesTest {
 
         // QUAND un badge bloqué est passé devant le lecteur
         lecteurFake.simulerDétectionBadge(badge);
+        lecteurFake.simulerBloquagePorte(porteSpy);
 
         // ET que ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -59,6 +60,7 @@ public class ControleAccesTest {
         // QUAND un badge bloqué puis débloqué est passé devant le lecteur
         lecteurFake.simulerDétectionBadge(badgeBloqué);
         lecteurFake.simulerDétectionBadge(badgeDébloqué);
+        lecteurFake.simulerBloquagePorte(porteSpy);
 
         // ET que ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -76,6 +78,7 @@ public class ControleAccesTest {
 
         // QUAND un badge est passé devant le lecteur sans que le lecteur ne soit interrogé
         lecteurFake.simulerDétectionBadge(badge);
+        lecteurFake.simulerBloquagePorte(porteSpy);
 
         // ALORS la porte n'est pas deverrouillée
         assertEquals(0, porteSpy.VérifierOuvertureDemandée());
@@ -90,6 +93,7 @@ public class ControleAccesTest {
 
         // QUAND un badge est présenté
         lecteurFake.simulerDétectionBadge(badge);
+        lecteurFake.simulerBloquagePorte(porteSpy);
 
         // ET que ce lecteur est interrogé deux fois
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -107,6 +111,7 @@ public class ControleAccesTest {
 
         // QUAND on interroge ce lecteur sans qu'il ait détecté un badge
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
+        lecteurFake.simulerBloquagePorte(porteSpy);
 
         // ALORS la porte n'est pas deverrouillée
         assertEquals(0, porteSpy.VérifierOuvertureDemandée());
@@ -121,6 +126,7 @@ public class ControleAccesTest {
 
         // QUAND un badge est présenté
         lecteurFake.simulerDétectionBadge(badge);
+        lecteurFake.simulerBloquagePorte(porteSpy);
 
         // ET que ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -139,6 +145,8 @@ public class ControleAccesTest {
 
         // QUAND un badge est passé devant le lecteur
         lecteurFake.simulerDétectionBadge(badge);
+        lecteurFake.simulerBloquagePorte(porteSpy1);
+        lecteurFake.simulerBloquagePorte(porteSpy2);
 
         // ET que ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -158,6 +166,8 @@ public class ControleAccesTest {
 
         // QUAND un badge est passé devant le deuxième lecteur
         lecteurFake2.simulerDétectionBadge(badge);
+        lecteurFake1.simulerBloquagePorte(porteSpy);
+        lecteurFake2.simulerBloquagePorte(porteSpy);
 
         // ET que ces lecteurs sont interrogés
         MoteurOuverture.InterrogerLecteurs(lecteurFake1, lecteurFake2);
@@ -177,6 +187,8 @@ public class ControleAccesTest {
 
         // QUAND un badge est passé devant le deuxième lecteur
         lecteurFake2.simulerDétectionBadge(badge);
+        lecteurFake1.simulerBloquagePorte(porteSpy1);
+        lecteurFake2.simulerBloquagePorte(porteSpy2);
 
         // ET que ces lecteurs sont interrogés
         MoteurOuverture.InterrogerLecteurs(lecteurFake1, lecteurFake2);

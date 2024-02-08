@@ -14,6 +14,10 @@ public class LecteurFake implements LecteurInterface {
         _badgeBloqué = badge.estBloqué;
     }
 
+    public void simulerBloquagePorte(PorteSpy porte) {
+        _porteBloquée = porte.EstBloquée();
+    }
+
     @Override
     public boolean aDétectéBadge() {
         var val = _aDétectéBadge;
@@ -28,7 +32,7 @@ public class LecteurFake implements LecteurInterface {
 
     @Override
     public boolean porteBloquée() {
-        return _porteBloquée = true;
+        return _porteBloquée;
     }
 
     public LecteurFake(PorteInterface... portesLiées) {
