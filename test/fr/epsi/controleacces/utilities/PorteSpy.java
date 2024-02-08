@@ -6,14 +6,14 @@ public class PorteSpy implements PorteInterface {
     public PorteSpy(){
     }
 
-    private boolean _ouvertureDemandée = false;
+    private Integer _nombreOuvertureDemandée = 0;
 
-    public boolean VérifierOuvertureDemandée() {
-        return _ouvertureDemandée;
+    public Integer VérifierOuvertureDemandée() {
+        return _nombreOuvertureDemandée;
     }
 
     @Override
     public void Ouvrir() {
-        _ouvertureDemandée = true;
+        _nombreOuvertureDemandée += 1;
     }
 }

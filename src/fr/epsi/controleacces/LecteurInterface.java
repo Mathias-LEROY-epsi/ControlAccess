@@ -1,8 +1,8 @@
 package fr.epsi.controleacces;
 
 public interface LecteurInterface {
-    boolean ADétectéBadge();
-    boolean ValiditeDuBadge();
+    boolean aDétectéBadge();
+    boolean badgeBloqué();
 
     PorteInterface[] getPortes();
 }

@@ -3,32 +3,29 @@ package fr.epsi.controleacces.utilities;
 import fr.epsi.controleacces.LecteurInterface;
 import fr.epsi.controleacces.PorteInterface;
 
-public class LecteurFake implements LecteurInterface {
+public class lecteurFake implements LecteurInterface {
     private final PorteInterface[] _portes;
     private boolean _aDétectéBadge = false;
     private boolean _badgeBloqué = false;
-    public void SimulerDétectionBadge() {
+
+    public void simulerDétectionBadge(Badge badge) {
         _aDétectéBadge = true;
-    }
-
-    public void SimulerBloquageDuBadge() {
-        _badgeBloqué = true;
-    }
-
-    public void SimulerDébloquageDuBadge() {
-        _badgeBloqué = false;
-    }
-    @Override
-    public boolean ADétectéBadge() {
-        return _aDétectéBadge;
+        _badgeBloqué = badge.estBloqué;
     }
 
     @Override
-    public boolean ValiditeDuBadge() {
+    public boolean aDétectéBadge() {
+        var val = _aDétectéBadge;
+        _aDétectéBadge = false;
+        return val;
+    }
+
+    @Override
+    public boolean badgeBloqué() {
        return _badgeBloqué;
     }
 
-    public LecteurFake(PorteInterface... portesLiées) {
+    public lecteurFake(PorteInterface... portesLiées) {
         this._portes = portesLiées;
     }
 
