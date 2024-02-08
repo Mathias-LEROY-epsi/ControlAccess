@@ -111,6 +111,23 @@ public class ControleAccesTest {
     }
 
     @Test
+    void CasPorteBloqué() {
+        // ETANT DONNE une porte bloquée
+        var porteSpy = new PorteSpy();
+        var lecteurFake = new lecteurFake(porteSpy);
+        var badge = new Badge(false);
+
+        // QUAND un badge est présenté
+        lecteurFake.simulerDétectionBadge(badge);
+
+        // ET que ce lecteur est interrogé
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte n'est pas deverrouillée
+        assertEquals(0, porteSpy.VérifierOuvertureDemandée());
+    }
+
+    @Test
     void CasPlusieursPortes(){
         // ETANT DONNE un lecteur relié à deux portes
         var porteSpy1 = new PorteSpy();
