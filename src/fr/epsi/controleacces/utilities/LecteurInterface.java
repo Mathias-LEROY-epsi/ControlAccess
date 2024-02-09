@@ -1,4 +1,4 @@
-package fr.epsi.controleacces;
+package fr.epsi.controleacces.utilities;
 
 public interface LecteurInterface {
     boolean aDétectéBadge();

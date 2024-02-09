@@ -1,6 +1,6 @@
-package fr.epsi.controleacces.utilities;
+package fr.epsi.controleacces;
 
-import fr.epsi.controleacces.PorteInterface;
+import fr.epsi.controleacces.utilities.PorteInterface;
 
 public class PorteSpy implements PorteInterface {
     private final PorteFake _comportement;
@@ -21,7 +21,12 @@ public class PorteSpy implements PorteInterface {
     }
 
     @Override
+    public void IntervertirBloquéDébloqué() {
+        _comportement.IntervertirBloquéDébloqué();
+    }
+
+    @Override
     public boolean EstBloquée() {
-        return _comportement.EstBloquée();
+        return _comportement.bloquée;
     }
 }

@@ -53,7 +53,7 @@ ALORS la porte ne s'ouvre pas
 
 (✅) Le test précédent valide indirectement les tests liés sur le blocage de plusieurs portes
 
-✅ ETANT DONNE un lecteur relié à deux portes dont une bloquée 
+✅ ETANT DONNE un lecteur relié à deux portes dont une bloquée  
 QUAND un badge est présenté  
 ET que le lecteur est interrogé  
 ALORS seule la porte bloquée ne s'ouvre pas

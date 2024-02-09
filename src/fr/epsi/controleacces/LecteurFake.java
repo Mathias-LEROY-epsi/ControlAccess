@@ -1,7 +1,7 @@
-package fr.epsi.controleacces.utilities;
+package fr.epsi.controleacces;
 
-import fr.epsi.controleacces.LecteurInterface;
-import fr.epsi.controleacces.PorteInterface;
+import fr.epsi.controleacces.utilities.LecteurInterface;
+import fr.epsi.controleacces.utilities.PorteInterface;
 
 public class LecteurFake implements LecteurInterface {
     private final PorteInterface[] _portes;
