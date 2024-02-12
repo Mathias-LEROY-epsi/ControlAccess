@@ -29,4 +29,14 @@ public class PorteSpy implements PorteInterface {
     public boolean EstBloquée() {
         return _comportement.bloquée;
     }
+
+    @Override
+    public void DefinirPlageHoraire(Integer heureDébut, Integer heureFin) {
+        _comportement.DefinirPlageHoraire(heureDébut, heureFin);
+    }
+
+    @Override
+    public boolean EstDansPlageHoraire() {
+        return _comportement.EstDansPlageHoraire();
+    }
 }

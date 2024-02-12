@@ -57,3 +57,69 @@ ALORS la porte ne s'ouvre pas
 QUAND un badge est présenté  
 ET que le lecteur est interrogé  
 ALORS seule la porte bloquée ne s'ouvre pas
+
+ETANT DONNE un lecteur relié à une porte
+QUAND l'heure actuelle est dans la plage horaire
+ALORS la porte s'ouvre
+
+ETANT DONNE un lecteur relié à une porte
+QUAND l'heure actuelle est dans la plage horaire
+ET que le badge est bloqué
+ALORS la porte s'ouvre
+
+ETANT DONNE un lecteur relié à une porte
+QUAND l'heure actuelle est dans la plage horaire
+ET que le badge est débloqué
+ALORS la porte s'ouvre
+
+ETANT DONNE un lecteur relié à une porte
+QUAND l'heure actuelle n'est pas dans la plage horaire
+ALORS la porte n'est pas déverrouillée
+
+ETANT DONNE un lecteur relié à une porte
+QUAND l'heure actuelle n'est pas dans la plage horaire
+ET que le badge est bloqué
+ALORS la porte n'est pas déverrouillée
+
+ETANT DONNE un lecteur relié à une porte
+QUAND l'heure actuelle n'est pas dans la plage horaire
+ET que le badge est débloqué
+ALORS la porte n'est pas déverrouillée
+
+ETANT DONNE un lecteur relié à deux portes
+QUAND l'heure actuelle est dans la plage horaire
+ALORS la porte s'ouvrir
+
+ETANT DONNE un lecteur relié à deux portes
+QUAND l'heure actuelle n'est pas dans la plage horaire
+ALORS la porte n'est pas déverrouillée
+
+ETANT DONNE un lecteur lié à une porte  
+QUAND l'heure actuelle est dans la plage horaire
+ET un badge est bloqué puis débloqué
+ALORS cette porte s'ouvre
+
+ETANT DONNE un lecteur lié à une porte  
+QUAND l'heure actuelle n'est pas dans la plage horaire
+ET un badge est bloqué puis débloqué
+ALORS la porte n'est pas déverrouillée
+
+ETANT DONNE un lecteur lié à deux portes
+QUAND l'heure actuelle est dans la plage horaire pour la première porte
+ET l'heure actuelle n'est pas dans la plage horaire pour la deuxième porte
+ALORS la première porte s'ouvre
+
+ETANT DONNE un lecteur lié à deux portes
+QUAND l'heure actuelle n'est pas dans la plage horaire pour la première porte
+ET l'heure actuelle est dans la plage horaire pour la deuxième porte
+ALORS la deuxième porte s'ouvre
+
+ETANT DONNE un lecteur lié à une porte sans plage horaire définie
+QUAND l'heure actuelle est dans la plage horaire
+ALORS la porte ne s'ouvre pas
+
+TEST 25 :
+ETANT DONNE un lecteur lié à une porte avec une plage horaire non valide (plage horaire de fin avant plage horaire de début)
+QUAND l'heure actuelle est dans la plage horaire
+ALORS la porte ne s'ouvre pas
+
