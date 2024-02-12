@@ -289,4 +289,23 @@ public class ControleAccesTest {
         // ALORS la porte est deverrouillée
         assertEquals(1, porteSpy.VérifierOuvertureDemandée());
     }
+
+    @Test
+    void CasDansPlageHoraireSansBadge() {
+        // ETANT DONNE un lecteur relié à une porte
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(12);
+
+        var porteFake = new PorteFake(horloge);
+        porteFake.DefinirPlageHoraire(8, 17);
+
+        var porteSpy = new PorteSpy(porteFake);
+        var lecteurFake = new LecteurFake(porteSpy);
+
+        // ET que ce lecteur est interrogé
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte est deverrouillée
+        assertEquals(1, porteSpy.VérifierOuvertureDemandée());
+    }
 }
