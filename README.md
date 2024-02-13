@@ -58,7 +58,7 @@ QUAND un badge est présenté
 ET que le lecteur est interrogé  
 ALORS seule la porte bloquée ne s'ouvre pas
 
-ETANT DONNE un lecteur relié à une porte
+✅ ETANT DONNE un lecteur relié à une porte
 QUAND l'heure actuelle est dans la plage horaire
 ALORS la porte s'ouvre
 

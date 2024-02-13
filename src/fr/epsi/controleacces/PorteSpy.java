@@ -3,12 +3,12 @@ package fr.epsi.controleacces;
 import fr.epsi.controleacces.utilities.PorteInterface;
 
 public class PorteSpy implements PorteInterface {
-    private final PorteFake _comportement;
-
-    public PorteSpy(PorteFake comportement) {
-        _comportement = comportement;
-    }
+    private final PorteFake _fake;
     private Integer _nombreOuvertureDemandée = 0;
+
+    public PorteSpy(PorteFake fake) {
+        _fake = fake;
+    }
 
     public Integer VérifierOuvertureDemandée() {
         return _nombreOuvertureDemandée;
@@ -17,26 +17,26 @@ public class PorteSpy implements PorteInterface {
     @Override
     public void Ouvrir() {
         _nombreOuvertureDemandée += 1;
-        _comportement.Ouvrir();
+        _fake.Ouvrir();
     }
 
     @Override
     public void IntervertirBloquéDébloqué() {
-        _comportement.IntervertirBloquéDébloqué();
+        _fake.IntervertirBloquéDébloqué();
     }
 
     @Override
     public boolean EstBloquée() {
-        return _comportement.bloquée;
+        return _fake.bloquée;
     }
 
     @Override
     public void DefinirPlageHoraire(Integer heureDébut, Integer heureFin) {
-        _comportement.DefinirPlageHoraire(heureDébut, heureFin);
+        _fake.DefinirPlageHoraire(heureDébut, heureFin);
     }
 
     @Override
     public boolean EstDansPlageHoraire() {
-        return _comportement.EstDansPlageHoraire();
+        return _fake.EstDansPlageHoraire();
     }
 }

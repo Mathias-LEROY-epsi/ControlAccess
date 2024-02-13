@@ -5,13 +5,17 @@ import fr.epsi.controleacces.utilities.LecteurInterface;
 
 public class MoteurOuverture {
     public static void InterrogerLecteurs(LecteurInterface... lecteurs) {
-        for (var lecteur : lecteurs)
-            //if(lecteur.aDétectéBadge()) // stocker la valeur
-                for (var porte : lecteur.getPortes())
-                    if(porte.EstDansPlageHoraire())
+        for (var lecteur : lecteurs) {
+            boolean aDetecteBadge = lecteur.aDétectéBadge();
+            for (var porte : lecteur.getPortes()) {
+                if(porte.EstDansPlageHoraire())
+                    porte.Ouvrir();
+                else {
+                    if(aDetecteBadge && !lecteur.badgeBloqué() && !porte.EstBloquée()) {
                         porte.Ouvrir();
-                    else if(!lecteur.badgeBloqué() && !porte.EstBloquée()) {
-                            porte.Ouvrir();
                     }
+                }
+            }
+        }
     }
 }
