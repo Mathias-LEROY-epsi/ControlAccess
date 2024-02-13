@@ -8,7 +8,7 @@ public class MoteurOuverture {
         for (var lecteur : lecteurs) {
             boolean aDetecteBadge = lecteur.aDétectéBadge();
             for (var porte : lecteur.getPortes()) {
-                if(porte.EstDansPlageHoraire())
+                if(porte.EstDansPlageHoraire() && !porte.EstBloquée())
                     porte.Ouvrir();
                 else {
                     if(aDetecteBadge && !lecteur.badgeBloqué() && !porte.EstBloquée()) {
