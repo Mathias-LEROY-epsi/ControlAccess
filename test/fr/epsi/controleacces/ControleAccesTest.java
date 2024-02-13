@@ -215,6 +215,34 @@ public class ControleAccesTest {
         assertEquals(0, porteSpy2.VérifierOuvertureDemandée());
     }
 
+
+    @Test
+    void CasPlusieursPortesDontUneBloquéeDansPlageHoraire() {
+        // ETANT DONNE un lecteur relié à deux portes dont une bloquée
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(12);
+
+        var porteFake1 = new PorteFake(horloge);
+        var porteFake2 = new PorteFake(horloge);
+
+        porteFake2.IntervertirBloquéDébloqué(); // porte bloquée
+        var porteSpy1 = new PorteSpy(porteFake1);
+        var porteSpy2 = new PorteSpy(porteFake2);
+        var lecteurFake = new LecteurFake(porteSpy1, porteSpy2);
+
+        var badge = new Badge();
+
+        // QUAND un badge est passé devant le lecteur
+        lecteurFake.simulerDétectionBadge(badge);
+
+        // ET que ce lecteur est interrogé
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS seule la porte bloquée ne s'ouvre pas
+        assertEquals(1, porteSpy1.VérifierOuvertureDemandée());
+        assertEquals(0, porteSpy2.VérifierOuvertureDemandée());
+    }
+
     @Test
     void CasPlusieursLecteurs() {
         // ETANT DONNE plusieurs lecteurs reliés à une porte
@@ -272,7 +300,7 @@ public class ControleAccesTest {
         horloge.DefinirHeureActuelle(12);
 
         var porteFake = new PorteFake(horloge);
-        porteFake.DefinirPlageHoraire(8, 17);
+        porteFake.DefinirPlageHoraire(8, 18);
 
         var porteSpy = new PorteSpy(porteFake);
         var lecteurFake = new LecteurFake(porteSpy);
@@ -297,7 +325,7 @@ public class ControleAccesTest {
         horloge.DefinirHeureActuelle(12);
 
         var porteFake = new PorteFake(horloge);
-        porteFake.DefinirPlageHoraire(8, 17);
+        porteFake.DefinirPlageHoraire(8, 18);
 
         var porteSpy = new PorteSpy(porteFake);
         var lecteurFake = new LecteurFake(porteSpy);
