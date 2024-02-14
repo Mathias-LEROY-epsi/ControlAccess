@@ -215,7 +215,6 @@ public class ControleAccesTest {
         assertEquals(0, porteSpy2.VérifierOuvertureDemandée());
     }
 
-
     @Test
     void CasPlusieursPortesDontUneBloquéeDansPlageHoraire() {
         // ETANT DONNE un lecteur relié à deux portes dont une bloquée
@@ -308,10 +307,10 @@ public class ControleAccesTest {
         var badge = new Badge();
         badge.IntervertirBloquéDébloqué(); // badge bloqué
 
-        // QUAND l'heure actuelle est dans la plage horaire
+        // ET QUE l'heure actuelle est dans la plage horaire
         lecteurFake.simulerDétectionBadge(badge);
 
-        // ET que ce lecteur est interrogé
+        // QUAND ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
         // ALORS la porte est deverrouillée
@@ -331,6 +330,29 @@ public class ControleAccesTest {
         var lecteurFake = new LecteurFake(porteSpy);
 
         // ET que ce lecteur est interrogé
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte est deverrouillée
+        assertEquals(1, porteSpy.VérifierOuvertureDemandée());
+    }
+
+    @Test
+    void CasDansLaSemaine() {
+        // ETANT DONNE un lecteur relié à une porte
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(22);
+
+        var jourDeLaSemaine = 1; // lundi
+
+        // ET que le lecteur est interrogé un jour de la semaine
+        var porteFake = new PorteFake(horloge, jourDeLaSemaine);
+        porteFake.DefinirPlageHoraire(8, 18);
+        var porteSpy = new PorteSpy(porteFake);
+        var lecteurFake = new LecteurFake(porteSpy);
+
+        // QUAND un badge est présenté
+        var badge = new Badge();
+        lecteurFake.simulerDétectionBadge(badge);
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
         // ALORS la porte est deverrouillée
