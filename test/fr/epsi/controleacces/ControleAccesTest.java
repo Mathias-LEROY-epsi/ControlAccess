@@ -2,13 +2,12 @@ package fr.epsi.controleacces;
 
 import org.junit.jupiter.api.Test;
 
-import java.nio.ShortBuffer;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ControleAccesTest {
     @Test
-    void TestOk(){
+    void TestOk() {
         assertTrue(true);
     }
 
@@ -19,8 +18,11 @@ public class ControleAccesTest {
         horloge.DefinirHeureActuelle(18);
         var porteFake = new PorteFake(horloge);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new LecteurFake(porteSpy);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
         var badge = new Badge();
 
         // QUAND un badge est passé devant le lecteur
@@ -40,8 +42,11 @@ public class ControleAccesTest {
         horloge.DefinirHeureActuelle(18);
         var porteFake = new PorteFake(horloge);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new LecteurFake(porteSpy);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
 
         var badge = new Badge();
         badge.IntervertirBloquéDébloqué(); // badge bloqué
@@ -63,8 +68,11 @@ public class ControleAccesTest {
         horloge.DefinirHeureActuelle(18);
         var porteFake = new PorteFake(horloge);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new LecteurFake(porteSpy);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
 
         var badge = new Badge();
         badge.IntervertirBloquéDébloqué(); // badge bloqué
@@ -81,14 +89,17 @@ public class ControleAccesTest {
     }
 
     @Test
-    void CasSansInterrogation(){
+    void CasSansInterrogation() {
         // ETANT DONNE un lecteur relié à une porte
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(18);
         var porteFake = new PorteFake(horloge);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new LecteurFake(porteSpy);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
 
         var badge = new Badge();
 
@@ -100,14 +111,17 @@ public class ControleAccesTest {
     }
 
     @Test
-    void CasPlusieursInterrogations(){
+    void CasPlusieursInterrogations() {
         // ETANT DONNE un lecteur relié à une porte
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(18);
         var porteFake = new PorteFake(horloge);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new LecteurFake(porteSpy);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
 
         var badge = new Badge();
 
@@ -123,14 +137,17 @@ public class ControleAccesTest {
     }
 
     @Test
-    void CasSansDétection(){
+    void CasSansDétection() {
         // ETANT DONNE un lecteur relié à une porte
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(18);
         var porteFake = new PorteFake(horloge);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new LecteurFake(porteSpy);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
 
         // QUAND on interroge ce lecteur sans qu'il ait détecté un badge
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -146,9 +163,12 @@ public class ControleAccesTest {
         horloge.DefinirHeureActuelle(18);
         var porteFake = new PorteFake(horloge);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         porteFake.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new LecteurFake(porteSpy);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
 
         var badge = new Badge();
 
@@ -163,17 +183,20 @@ public class ControleAccesTest {
     }
 
     @Test
-    void CasPlusieursPortes(){
+    void CasPlusieursPortes() {
         // ETANT DONNE un lecteur relié à deux portes
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(18);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
 
         var porteFake1 = new PorteFake(horloge);
         var porteFake2 = new PorteFake(horloge);
 
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
-        var lecteurFake = new LecteurFake(porteSpy1, porteSpy2);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy1, porteSpy2);
 
         var badge = new Badge();
 
@@ -189,10 +212,13 @@ public class ControleAccesTest {
     }
 
     @Test
-    void CasPlusieursPortesDontUneBloquée(){
+    void CasPlusieursPortesDontUneBloquée() {
         // ETANT DONNE un lecteur relié à deux portes dont une bloquée
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(18);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
 
         var porteFake1 = new PorteFake(horloge);
         var porteFake2 = new PorteFake(horloge);
@@ -200,7 +226,7 @@ public class ControleAccesTest {
         porteFake2.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
-        var lecteurFake = new LecteurFake(porteSpy1, porteSpy2);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy1, porteSpy2);
 
         var badge = new Badge();
 
@@ -221,13 +247,16 @@ public class ControleAccesTest {
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(12);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteFake1 = new PorteFake(horloge);
         var porteFake2 = new PorteFake(horloge);
 
         porteFake2.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
-        var lecteurFake = new LecteurFake(porteSpy1, porteSpy2);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy1, porteSpy2);
 
         var badge = new Badge();
 
@@ -249,9 +278,12 @@ public class ControleAccesTest {
         horloge.DefinirHeureActuelle(18);
         var porteFake = new PorteFake(horloge);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake1 = new LecteurFake(porteSpy);
-        var lecteurFake2 = new LecteurFake(porteSpy);
+        var lecteurFake1 = new LecteurFake(calendrier, porteSpy);
+        var lecteurFake2 = new LecteurFake(calendrier, porteSpy);
 
         var badge = new Badge();
 
@@ -271,13 +303,16 @@ public class ControleAccesTest {
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(18);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteFake1 = new PorteFake(horloge);
         var porteFake2 = new PorteFake(horloge);
 
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
-        var lecteurFake1 = new LecteurFake(porteSpy1);
-        var lecteurFake2 = new LecteurFake(porteSpy2);
+        var lecteurFake1 = new LecteurFake(calendrier, porteSpy1);
+        var lecteurFake2 = new LecteurFake(calendrier, porteSpy2);
 
         var badge = new Badge();
 
@@ -298,11 +333,14 @@ public class ControleAccesTest {
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(12);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteFake = new PorteFake(horloge);
         porteFake.DefinirPlageHoraire(8, 18);
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new LecteurFake(porteSpy);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
 
         var badge = new Badge();
         badge.IntervertirBloquéDébloqué(); // badge bloqué
@@ -323,11 +361,14 @@ public class ControleAccesTest {
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(12);
 
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
         var porteFake = new PorteFake(horloge);
         porteFake.DefinirPlageHoraire(8, 18);
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new LecteurFake(porteSpy);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
 
         // ET que ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -342,13 +383,13 @@ public class ControleAccesTest {
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(22);
 
-        var jourDeLaSemaine = 1; // lundi
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
 
         // ET que le lecteur est interrogé un jour de la semaine
-        var porteFake = new PorteFake(horloge, jourDeLaSemaine);
-        porteFake.DefinirPlageHoraire(8, 18);
+        var porteFake = new PorteFake(horloge);
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new LecteurFake(porteSpy);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
 
         // QUAND un badge est présenté
         var badge = new Badge();

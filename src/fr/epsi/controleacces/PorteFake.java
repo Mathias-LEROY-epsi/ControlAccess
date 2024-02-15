@@ -9,11 +9,12 @@ public class PorteFake implements PorteInterface {
     private Integer _heureDébut = 8;
     private Integer _heureFin = 17;
 
-    public PorteFake(HorlogeInterface horloge){
+    public PorteFake(HorlogeInterface horloge) {
         _horloge = horloge;
     }
 
-    public void Ouvrir() {}
+    public void Ouvrir() {
+    }
 
     public void IntervertirBloquéDébloqué() {
         bloquée = !bloquée;
