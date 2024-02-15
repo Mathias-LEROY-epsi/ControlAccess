@@ -1,12 +1,14 @@
 package fr.epsi.controleacces;
 
 import fr.epsi.controleacces.utilities.BadgeInterface;
-import fr.epsi.controleacces.utilities.PorteInterface;
 
 public class Badge implements BadgeInterface {
     public boolean estBloqué = false;
 
-    public Badge() {}
+    public String grade = "Utilisateur";
+
+    public Badge() {
+    }
 
     @Override
     public void IntervertirBloquéDébloqué() {
@@ -16,5 +18,19 @@ public class Badge implements BadgeInterface {
     @Override
     public boolean EstBloqué() {
         return estBloqué;
+    }
+
+    @Override
+    public String ObtenirGrade() {
+        return grade;
+    }
+
+    @Override
+    public void IntervertirGrade() {
+        if (grade.equals("Utilisateur")) {
+            grade = "Admin";
+        } else {
+            grade = "Utilisateur";
+        }
     }
 }

@@ -4,15 +4,27 @@ import fr.epsi.controleacces.utilities.CalendrierInterface;
 import fr.epsi.controleacces.utilities.LecteurInterface;
 import fr.epsi.controleacces.utilities.PorteInterface;
 
-public class LecteurFake implements LecteurInterface {
+public class Lecteur implements LecteurInterface {
     private final PorteInterface[] _portes;
     private final CalendrierInterface _calendrier;
+    private boolean _estAdministrateur = false;
     private boolean _aDétectéBadge = false;
     private boolean _badgeBloqué = false;
 
     public void simulerDétectionBadge(Badge badge) {
         _aDétectéBadge = true;
         _badgeBloqué = badge.estBloqué;
+    }
+
+    public void VérifierSiBagdeEstAdministrateur(Badge badge) {
+        if (badge.ObtenirGrade().equals("Admin")) {
+            _estAdministrateur = true;
+        }
+    }
+
+    @Override
+    public boolean VérifierSiBagdeEstAdministrateur() {
+        return _estAdministrateur;
     }
 
     @Override
@@ -27,7 +39,7 @@ public class LecteurFake implements LecteurInterface {
         return _badgeBloqué;
     }
 
-    public LecteurFake(CalendrierInterface calendrier, PorteInterface... portesLiées) {
+    public Lecteur(CalendrierInterface calendrier, PorteInterface... portesLiées) {
         this._calendrier = calendrier;
         this._portes = portesLiées;
     }
