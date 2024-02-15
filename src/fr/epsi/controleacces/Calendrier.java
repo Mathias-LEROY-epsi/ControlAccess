@@ -43,7 +43,7 @@ public class Calendrier implements CalendrierInterface {
             if (!joursBloques.containsKey(j)) {
                 continue;
             }
-            joursBloques.put(j, false);
+            joursBloques.put(j, true);
         }
     }
 
@@ -53,7 +53,7 @@ public class Calendrier implements CalendrierInterface {
             if (!joursBloques.containsKey(j)) {
                 continue;
             }
-            joursBloques.put(j, true);
+            joursBloques.put(j, false);
         }
     }
 

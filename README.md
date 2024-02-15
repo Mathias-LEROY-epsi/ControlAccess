@@ -1,9 +1,13 @@
 # ControleAcces
 
-Le projet simule un système de contrôle d'accès. On peut y trouver des lecteurs, des portes, des badges, des zones et des plages horaires. Le but est de tester les différentes fonctionnalités du système et ainsi s'assurer de son bon fonctionnement.  
-On utilise la méthode ATDD (Acceptance Test Driven Design) pour développer le projet. La première étape est de faire un test qui échoue. Ensuite, on développe le code pour que le test passe. Enfin, on refactorise le code.
+Le projet simule un système de contrôle d'accès. On peut y trouver des lecteurs, des portes, des badges, des zones et
+des plages horaires. Le but est de tester les différentes fonctionnalités du système et ainsi s'assurer de son bon
+fonctionnement.  
+On utilise la méthode ATDD (Acceptance Test Driven Design) pour développer le projet. La première étape est de faire un
+test qui échoue. Ensuite, on développe le code pour que le test passe. Enfin, on refactorise le code.
 
 # Use Cases
+
 1: ✅ ETANT DONNE un lecteur lié à une porte  
 QUAND un badge est présenté  
 ET que ce lecteur est interrogé  
@@ -69,14 +73,14 @@ ET QUE l'heure actuelle est dans la plage horaire
 QUAND le badge est bloqué  
 ALORS la porte s'ouvre
 
-14: ETANT DONNE un lecteur relié à une porte  
+14: ✅ ETANT DONNE un lecteur relié à une porte  
 ET que le lecteur est interrogé un jour de la semaine (hors week-end)  
 QUAND un badge est présenté  
 ALORS la porte s'ouvre
 
-15: ETANT DONNE un lecteur relié à une porte  
-ET que le lecteur est interrogé le lundi, mercredi, ou le samedi (on surcharge)
-QUAND un badge est présenté  
-ALORS la porte ne s'ouvre pas
+15: ETANT DONNE une porte bloquée  
+ET que le lecteur est interrogé  
+QUAND un badge administrateur est présenté  
+ALORS la porte s'ouvre
 
 

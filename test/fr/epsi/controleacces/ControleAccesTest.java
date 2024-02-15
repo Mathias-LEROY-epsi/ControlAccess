@@ -399,4 +399,29 @@ public class ControleAccesTest {
         // ALORS la porte est deverrouillée
         assertEquals(1, porteSpy.VérifierOuvertureDemandée());
     }
+
+    @Test
+    void CasBadgeAdmin() {
+        // ETANT DONNE un lecteur relié à une porte
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(22);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
+        // ET que le lecteur est interrogé
+        var porteFake = new PorteFake(horloge);
+        porteFake.EstBloquée(); // porte bloquée
+        var porteSpy = new PorteSpy(porteFake);
+        var lecteurFake = new LecteurFake(calendrier, porteSpy);
+
+        // QUAND un badge admin est présenté
+        var badge = new Badge();
+        badge.DefinirAdmin();
+        lecteurFake.simulerDétectionBadge(badge);
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte est deverrouillée
+        assertEquals(1, porteSpy.VérifierOuvertureDemandée());
+    }
 }
