@@ -40,8 +40,8 @@ public class Lecteur implements LecteurInterface {
     }
 
     public Lecteur(CalendrierInterface calendrier, PorteInterface... portesLiées) {
-        this._calendrier = calendrier;
-        this._portes = portesLiées;
+        _calendrier = calendrier;
+        _portes = portesLiées;
     }
 
     @Override

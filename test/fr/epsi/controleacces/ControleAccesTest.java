@@ -430,11 +430,12 @@ public class ControleAccesTest {
     void CasFermetureAutomatique() {
         // ETANT DONNE un lecteur relié à une porte
         var horloge = new Horloge();
-        horloge.DefinirHeureActuelle(22);
+        horloge.DefinirHeureActuelle(23);
 
         var calendrier = new Calendrier();
         calendrier.InitialisationDesJoursBloqués();
 
+        // ET que toutes les portes sont fermées de 22h à minuit (maintenance)
         var porteFake1 = new PorteFake(horloge);
         var porteSpy1 = new PorteSpy(porteFake1);
 
@@ -444,11 +445,6 @@ public class ControleAccesTest {
         var porteFake3 = new PorteFake(horloge);
         var porteSpy3 = new PorteSpy(porteFake3);
         var lecteurFake = new Lecteur(calendrier, porteSpy1, porteSpy2, porteSpy3);
-
-        // ET que toutes les portes sont fermées de 22h à minuit (maintenance)
-        porteFake1.DefinirFermeture(21, 24);
-        porteFake2.DefinirFermeture(21, 24);
-        porteFake3.DefinirFermeture(21, 24);
 
         // QUAND un badge est présenté
         var badge = new Badge();

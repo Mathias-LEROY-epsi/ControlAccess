@@ -27,12 +27,22 @@ public class PorteSpy implements PorteInterface {
 
     @Override
     public boolean EstBloquée() {
-        return _fake.bloquée;
+        return _fake._bloquée;
     }
 
     @Override
     public void DefinirPlageHoraire(Integer heureDébut, Integer heureFin) {
         _fake.DefinirPlageHoraire(heureDébut, heureFin);
+    }
+
+    @Override
+    public void DefinirFermetureMaintenance(Integer heureDébut, Integer heureFin) {
+        _fake.DefinirFermetureMaintenance(heureDébut, heureFin);
+    }
+
+    @Override
+    public boolean EstEnMaintenance() {
+        return _fake.EstEnMaintenance();
     }
 
     @Override

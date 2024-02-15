@@ -12,6 +12,6 @@ public class Horloge implements HorlogeInterface {
 
     @Override
     public void DefinirHeureActuelle(Integer heureActuelle) {
-        this._heureActuelle = heureActuelle;
+        _heureActuelle = heureActuelle;
     }
 }

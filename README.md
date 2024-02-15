@@ -83,9 +83,7 @@ ET que le lecteur est interrogé
 QUAND un badge administrateur est présenté  
 ALORS la porte s'ouvre
 
-16: ETANT DONNE un lecteur relié à une porte  
-ET que toutes les portes sont fermées de 22h à minuit (maintenance)  
+16: ✅ ETANT DONNE un lecteur relié à une porte  
+ET que toutes les portes sont fermées de 23h à minuit (maintenance)  
 QUAND un badge est présenté  
 ALORS la porte ne s'ouvre pas
-
-

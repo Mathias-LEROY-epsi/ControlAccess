@@ -3,11 +3,13 @@ package fr.epsi.controleacces;
 import fr.epsi.controleacces.utilities.HorlogeInterface;
 import fr.epsi.controleacces.utilities.PorteInterface;
 
+import java.util.List;
+
 public class PorteFake implements PorteInterface {
     private final HorlogeInterface _horloge;
-    public boolean bloquée = false;
-    private Integer _heureDébut = 8;
-    private Integer _heureFin = 17;
+    public boolean _bloquée = false;
+    private List<Integer> _plageHoraire = List.of(8, 17);
+    private List<Integer> _heureFermeture = List.of(23, 24);
 
     public PorteFake(HorlogeInterface horloge) {
         _horloge = horloge;
@@ -17,22 +19,31 @@ public class PorteFake implements PorteInterface {
     }
 
     public void IntervertirBloquéDébloqué() {
-        bloquée = !bloquée;
+        _bloquée = !_bloquée;
     }
 
     @Override
     public boolean EstBloquée() {
-        return bloquée;
+        return _bloquée;
     }
 
     @Override
-    public void DefinirPlageHoraire(Integer heureDébut, Integer heureFin) {
-        this._heureDébut = heureDébut;
-        this._heureFin = heureFin;
+    public void DefinirPlageHoraire(Integer _heureDébut, Integer _heureFin) {
+        _plageHoraire = List.of(_heureDébut, _heureFin);
+    }
+
+    @Override
+    public void DefinirFermetureMaintenance(Integer _heureDébut, Integer _heureFin) {
+        _heureFermeture = List.of(_heureDébut, _heureFin);
+    }
+
+    @Override
+    public boolean EstEnMaintenance() {
+        return _horloge.GetHeureActuelle() >= _heureFermeture.getFirst() && _horloge.GetHeureActuelle() <= _heureFermeture.getLast();
     }
 
     @Override
     public boolean EstDansPlageHoraire() {
-        return _horloge.GetHeureActuelle() >= this._heureDébut && _horloge.GetHeureActuelle() <= this._heureFin;
+        return _horloge.GetHeureActuelle() >= _plageHoraire.getFirst() && _horloge.GetHeureActuelle() <= _plageHoraire.getLast();
     }
 }

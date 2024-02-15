@@ -2,12 +2,11 @@ package fr.epsi.controleacces;
 
 import fr.epsi.controleacces.utilities.CalendrierInterface;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Calendrier implements CalendrierInterface {
 
-    private Map<String, Boolean> joursBloques = new HashMap<>();
+    private Map<String, Boolean> joursBloques;
 
     private String jourActuel = "lundi";
 
@@ -28,13 +27,7 @@ public class Calendrier implements CalendrierInterface {
     @Override
     public void InitialisationDesJoursBloqués() {
         // Initialisation des jours de la semaine avec la valeur par défaut false (sauf week-end)
-        joursBloques.put("lundi", false);
-        joursBloques.put("mardi", false);
-        joursBloques.put("mercredi", false);
-        joursBloques.put("jeudi", false);
-        joursBloques.put("vendredi", false);
-        joursBloques.put("samedi", true);
-        joursBloques.put("dimanche", true);
+        joursBloques = Map.of("lundi", false, "mardi", false, "mercredi", false, "jeudi", false, "vendredi", false, "samedi", true, "dimanche", true);
     }
 
     @Override
