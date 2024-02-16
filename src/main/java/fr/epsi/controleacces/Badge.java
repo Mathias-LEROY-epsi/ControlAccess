@@ -2,10 +2,13 @@ package fr.epsi.controleacces;
 
 import fr.epsi.controleacces.utilities.BadgeInterface;
 
-public class Badge implements BadgeInterface {
-    public boolean estBloqué = false;
+import java.util.List;
 
-    public String grade = "Utilisateur";
+public class Badge implements BadgeInterface {
+    private boolean estBloqué = false;
+    private String grade = "Utilisateur";
+
+    private List<Zone> _zones;
 
     public Badge() {
     }
@@ -32,5 +35,10 @@ public class Badge implements BadgeInterface {
         } else {
             grade = "Utilisateur";
         }
+    }
+
+    @Override
+    public void AffecterAZones(List<Zone> zones) {
+        _zones = zones;
     }
 }

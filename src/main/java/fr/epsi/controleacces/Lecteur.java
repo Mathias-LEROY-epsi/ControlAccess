@@ -13,7 +13,7 @@ public class Lecteur implements LecteurInterface {
 
     public void simulerDétectionBadge(Badge badge) {
         _aDétectéBadge = true;
-        _badgeBloqué = badge.estBloqué;
+        _badgeBloqué = badge.EstBloqué();
     }
 
     public void VérifierSiBagdeEstAdministrateur(Badge badge) {

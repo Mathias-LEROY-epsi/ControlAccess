@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PorteFake implements PorteInterface {
     private final HorlogeInterface _horloge;
-    public boolean _bloquée = false;
+    private boolean _bloquée = false;
     private List<Integer> _plageHoraire = List.of(8, 17);
     private List<Integer> _heureFermeture = List.of(23, 24);
 

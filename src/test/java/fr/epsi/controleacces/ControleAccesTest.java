@@ -2,6 +2,8 @@ package fr.epsi.controleacces;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -428,14 +430,14 @@ public class ControleAccesTest {
 
     @Test
     void CasFermetureAutomatique() {
-        // ETANT DONNE un lecteur relié à une porte
+        // ETANT DONNE que toutes les portes sont fermées de 22h à minuit (maintenance)
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(23);
 
         var calendrier = new Calendrier();
         calendrier.InitialisationDesJoursBloqués();
 
-        // ET que toutes les portes sont fermées de 22h à minuit (maintenance)
+        // ET qu'un lecteur est relié à une porte
         var porteFake1 = new PorteFake(horloge);
         var porteSpy1 = new PorteSpy(porteFake1);
 
@@ -448,13 +450,52 @@ public class ControleAccesTest {
 
         // QUAND un badge est présenté
         var badge = new Badge();
-        lecteurFake.VérifierSiBagdeEstAdministrateur(badge);
         lecteurFake.simulerDétectionBadge(badge);
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
         // ALORS aucune porte ne s'ouvre
         assertEquals(0, porteSpy1.VérifierOuvertureDemandée());
         assertEquals(0, porteSpy2.VérifierOuvertureDemandée());
+        assertEquals(0, porteSpy3.VérifierOuvertureDemandée());
+    }
+
+    @Test
+    void CasPlusieursPortesLieesAPlusieursZones() {
+        // ETANT DONNE des portes de plusieurs zones
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(12);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
+        var porteFake1 = new PorteFake(horloge);
+        var porteSpy1 = new PorteSpy(porteFake1);
+
+        var porteFake2 = new PorteFake(horloge);
+        var porteSpy2 = new PorteSpy(porteFake2);
+
+        var porteFake3 = new PorteFake(horloge);
+        var porteSpy3 = new PorteSpy(porteFake3);
+
+        var zone1 = new Zone();
+        zone1.AjouterPortes(List.of(porteSpy1, porteSpy2));
+
+        var zone2 = new Zone();
+        zone2.AjouterPortes(List.of(porteSpy3));
+
+        // ET qu'un lecteur est relié à des portes de chaque zone
+        var lecteurFake = new Lecteur(calendrier, porteSpy1, porteSpy2, porteSpy3);
+
+        // QUAND un badge présenté est lié à une zone
+        var badge = new Badge();
+        badge.AffecterAZones(List.of(zone1));
+
+        lecteurFake.simulerDétectionBadge(badge);
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS seules les portes de cette zone s'ouvrent
+        assertEquals(1, porteSpy1.VérifierOuvertureDemandée());
+        assertEquals(1, porteSpy2.VérifierOuvertureDemandée());
         assertEquals(0, porteSpy3.VérifierOuvertureDemandée());
     }
 }
