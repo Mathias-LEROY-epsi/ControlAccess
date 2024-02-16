@@ -1,5 +1,7 @@
 package fr.epsi.controleacces.utilities;
 
+import java.util.List;
+
 public interface CalendrierInterface {
     void DéfinirJourActuel(String jour);
 
@@ -7,9 +9,9 @@ public interface CalendrierInterface {
 
     void InitialisationDesJoursBloqués();
 
-    void BloquerJour(String[] jour);
+    void BloquerJour(List<String> jour);
 
-    void DébloquerJour(String[] jour);
+    void DébloquerJour(List<String> jour);
 
     boolean VérifierSiJourEstBloqué(String jour);
 }

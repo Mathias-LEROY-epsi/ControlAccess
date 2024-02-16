@@ -22,7 +22,6 @@ public class MoteurOuverture {
                         porte.Ouvrir();
                     }
                 }
-
             }
         }
     }
