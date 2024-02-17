@@ -1,16 +1,26 @@
 # ControleAcces
 
 Le projet simule un système de contrôle d'accès. On peut y trouver des lecteurs, des portes, des badges, des zones et
-des plages horaires. Le but est de tester les différentes fonctionnalités du système et ainsi s'assurer de son bon
+des plages horaires. Le but est de tester les différentes fonctionnalités du système et de s'assurer de leur bon
 fonctionnement.  
-On utilise la méthode ATDD (Acceptance Test Driven Design) pour développer le projet. La première étape est de faire un
+On utilise la méthode EATDD (Executable Acceptance Test Driven Design) pour développer le projet. La première étape est
+de faire un
 test qui échoue. Ensuite, on développe le code pour que le test passe. Enfin, on refactorise le code.
+
+## Installation
+
+SDK 21 recommandé
+
+```bash
+git clone git@github.com:Mathias-LEROY-epsi/ControlAccess.git
+cd ControleAcces
+```
 
 # Use Cases
 
 1: ✅ ETANT DONNE un lecteur lié à une porte  
-QUAND un badge est présenté  
-ET que ce lecteur est interrogé  
+ET QU'UN badge est présenté  
+QUAND ce lecteur est interrogé  
 ALORS cette porte s'ouvre
 
 2: ✅ ETANT DONNE un lecteur lié à une porte  

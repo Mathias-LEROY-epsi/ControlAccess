@@ -25,11 +25,11 @@ public class ControleAccesTest {
         var badge = new Badge("Utilisateur");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
-        // QUAND un badge est passé devant le lecteur
+        // ET QU'UN badge est passé devant le lecteur
         lecteurFake.VerifierLeGradeDuBadge(badge);
         lecteurFake.simulerDétectionBadge(badge);
 
-        // ET que ce lecteur est interrogé
+        // QUAND ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
         // ALORS la porte est deverrouillée
