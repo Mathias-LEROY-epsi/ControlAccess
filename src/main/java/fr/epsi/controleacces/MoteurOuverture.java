@@ -10,24 +10,30 @@ public class MoteurOuverture {
             boolean jourBloqué = lecteur.VérifierSiJourActuelEstBloqué();
             boolean estAdministrateur = lecteur.VérifierSiBagdeEstAdministrateur();
             boolean estTechnicien = lecteur.VérifierSiBagdeEstTechnicien();
+            boolean estUtilisateur = lecteur.VérifierSiBagdeEstUtilisateur();
+            boolean estVisiteur = false;
 
             BadgeInterface badge = lecteur.getBadge();
             String badgeZone;
 
             if (badge == null) {
                 badgeZone = "A";
+                estVisiteur = true;
             } else {
                 badgeZone = badge.getZone();
             }
 
             for (var porte : lecteur.getPortes()) {
+                if (estVisiteur) {
+                    continue;
+                }
                 if (porte.EstEnMaintenance() && estTechnicien) {
                     porte.Ouvrir();
                 }
                 if (!porte.EstEnMaintenance() && !estTechnicien) {
                     if (estAdministrateur) {
                         porte.Ouvrir();
-                    } else if (lecteur.peutOuvrir(badgeZone, porte.getZone())) {
+                    } else if (estUtilisateur && lecteur.peutOuvrir(badgeZone, porte.getZone())) {
                         if ((Boolean.FALSE.equals(jourBloqué) && Boolean.FALSE.equals(porte.VerifierSiPorteBloquée()))) {
                             if (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué()) {
                                 porte.Ouvrir();

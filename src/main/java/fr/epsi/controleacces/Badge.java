@@ -4,7 +4,7 @@ import fr.epsi.controleacces.utilities.BadgeInterface;
 
 public class Badge implements BadgeInterface {
     private boolean estBloqué = false;
-    private String grade = "Utilisateur";
+    private String grade = "Visiteur";
 
     private String _zone = "A";
 
@@ -32,8 +32,10 @@ public class Badge implements BadgeInterface {
             grade = "Admin";
         } else if (_grade.equals("Technicien")) {
             grade = "Technicien";
-        } else {
+        } else if (_grade.equals("Utilisateur")) {
             grade = "Utilisateur";
+        } else {
+            grade = "Visiteur";
         }
     }
 

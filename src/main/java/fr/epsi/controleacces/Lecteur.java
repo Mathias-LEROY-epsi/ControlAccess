@@ -11,6 +11,7 @@ public class Lecteur implements LecteurInterface {
     private final CalendrierInterface _calendrier;
     private boolean _estAdministrateur = false;
     private boolean _estTechnicien = false;
+    private boolean _estUtilisateur = false;
     private boolean _aDétectéBadge = false;
     private boolean _badgeBloqué = false;
 
@@ -24,6 +25,8 @@ public class Lecteur implements LecteurInterface {
             _estAdministrateur = true;
         } else if (badge.ObtenirGrade().equals("Technicien")) {
             _estTechnicien = true;
+        } else if (badge.ObtenirGrade().equals("Utilisateur")) {
+            _estUtilisateur = true;
         }
     }
 
@@ -35,6 +38,11 @@ public class Lecteur implements LecteurInterface {
     @Override
     public boolean VérifierSiBagdeEstTechnicien() {
         return _estTechnicien;
+    }
+
+    @Override
+    public boolean VérifierSiBagdeEstUtilisateur() {
+        return _estUtilisateur;
     }
 
     @Override
