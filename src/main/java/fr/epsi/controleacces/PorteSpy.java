@@ -26,8 +26,8 @@ public class PorteSpy implements PorteInterface {
     }
 
     @Override
-    public boolean EstBloquée() {
-        return _fake.EstBloquée();
+    public boolean VerifierSiPorteBloquée() {
+        return _fake.VerifierSiPorteBloquée();
     }
 
     @Override

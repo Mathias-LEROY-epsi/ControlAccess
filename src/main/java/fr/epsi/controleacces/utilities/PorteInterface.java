@@ -9,7 +9,7 @@ public interface PorteInterface {
 
     void IntervertirBloquéDébloqué();
 
-    boolean EstBloquée();
+    boolean VerifierSiPorteBloquée();
 
     void DefinirPlageHoraire(Integer heureDébut, Integer heureFin);
 

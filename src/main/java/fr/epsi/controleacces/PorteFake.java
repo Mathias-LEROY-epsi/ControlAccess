@@ -33,7 +33,7 @@ public class PorteFake implements PorteInterface {
     }
 
     @Override
-    public boolean EstBloquée() {
+    public boolean VerifierSiPorteBloquée() {
         return _bloquée;
     }
 

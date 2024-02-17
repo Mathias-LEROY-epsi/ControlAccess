@@ -26,7 +26,7 @@ public class MoteurOuverture {
                 if (estAdministrateur) {
                     porte.Ouvrir();
                 } else if (lecteur.peutOuvrir(badgeZone, porte.getZone())) {
-                    if ((!jourBloqué && !porte.EstBloquée())) {
+                    if ((Boolean.FALSE.equals(jourBloqué) && Boolean.FALSE.equals(porte.VerifierSiPorteBloquée()))) {
                         if (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué()) {
                             porte.Ouvrir();
                         }

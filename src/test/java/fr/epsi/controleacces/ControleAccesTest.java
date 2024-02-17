@@ -404,7 +404,7 @@ public class ControleAccesTest {
 
         // ET que le lecteur est interrogé
         var porteFake = new PorteFake(horloge);
-        porteFake.EstBloquée(); // porte bloquée
+        porteFake.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy = new PorteSpy(porteFake);
         var badge = new Badge();
         badge.IntervertirGrade(); // badge admin
