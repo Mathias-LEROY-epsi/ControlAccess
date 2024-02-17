@@ -49,7 +49,7 @@ public class Calendrier implements CalendrierInterface {
     @Override
     public void DébloquerJour(List<String> jours) {
         joursBloques = joursBloques.stream()
-                .map(j -> jours.contains(j.getKey()) ? new Pair<>(j.getKey(), true) : j)
+                .map(j -> jours.contains(j.getKey()) ? new Pair<>(j.getKey(), false) : j)
                 .toList();
     }
 

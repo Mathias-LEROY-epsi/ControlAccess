@@ -22,8 +22,7 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est passé devant le lecteur
@@ -48,8 +47,7 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         badge.IntervertirBloquéDébloqué(); // badge bloqué
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
@@ -75,8 +73,7 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         badge.IntervertirBloquéDébloqué(); // badge bloqué
         badge.IntervertirBloquéDébloqué(); // badge débloqué
 
@@ -104,8 +101,7 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est passé devant le lecteur sans que le lecteur ne soit interrogé
@@ -127,8 +123,7 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est présenté
@@ -175,8 +170,7 @@ public class ControleAccesTest {
 
         porteFake.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy = new PorteSpy(porteFake);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est présenté
@@ -204,8 +198,7 @@ public class ControleAccesTest {
 
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy1, porteSpy2);
 
         // QUAND un badge est passé devant le lecteur
@@ -235,8 +228,7 @@ public class ControleAccesTest {
         porteFake2.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy1, porteSpy2);
 
         // QUAND un badge est passé devant le lecteur
@@ -267,8 +259,7 @@ public class ControleAccesTest {
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
 
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy1, porteSpy2);
 
         // QUAND un badge est passé devant le lecteur
@@ -294,8 +285,7 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
 
         var lecteurFake1 = new Lecteur(badge, calendrier, porteSpy);
         var lecteurFake2 = new Lecteur(badge, calendrier, porteSpy);
@@ -326,8 +316,7 @@ public class ControleAccesTest {
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
 
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         var lecteurFake1 = new Lecteur(badge, calendrier, porteSpy1);
         var lecteurFake2 = new Lecteur(badge, calendrier, porteSpy2);
 
@@ -356,8 +345,7 @@ public class ControleAccesTest {
         porteFake.DefinirPlageHoraire(8, 18);
 
         var porteSpy = new PorteSpy(porteFake);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         badge.IntervertirBloquéDébloqué(); // badge bloqué
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
@@ -406,8 +394,7 @@ public class ControleAccesTest {
         // ET que le lecteur est interrogé un jour de la semaine
         var porteFake = new PorteFake(horloge);
         var porteSpy = new PorteSpy(porteFake);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est présenté
@@ -432,8 +419,7 @@ public class ControleAccesTest {
         var porteFake = new PorteFake(horloge);
         porteFake.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy = new PorteSpy(porteFake);
-        var badge = new Badge();
-        badge.IntervertirGrade("Admin"); // badge admin
+        var badge = new Badge("Admin");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge admin est présenté
@@ -458,8 +444,7 @@ public class ControleAccesTest {
         var porteFake = new PorteFake(horloge);
         var porteSpy = new PorteSpy(porteFake);
 
-        var badge = new Badge();
-        badge.IntervertirGrade("Admin"); // badge admin
+        var badge = new Badge("Admin");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge admin est présenté
@@ -489,8 +474,7 @@ public class ControleAccesTest {
 
         var porteFake3 = new PorteFake(horloge);
         var porteSpy3 = new PorteSpy(porteFake3);
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy1, porteSpy2, porteSpy3);
 
         // QUAND un badge est présenté
@@ -526,8 +510,7 @@ public class ControleAccesTest {
         var porteSpy3 = new PorteSpy(porteFake3);
 
         // ET qu'un badge présenté est lié à une zone
-        var badge = new Badge();
-        badge.IntervertirGrade("Utilisateur");
+        var badge = new Badge("Utilisateur");
         badge.AffecterAZone("A");
 
         // Quand un lecteur est relié à des portes de chaque zone
@@ -555,8 +538,7 @@ public class ControleAccesTest {
         var porteFake = new PorteFake(horloge);
         var porteSpy = new PorteSpy(porteFake);
 
-        var badge = new Badge();
-        badge.IntervertirGrade("Technicien"); // badge technicien
+        var badge = new Badge("Technicien");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge technicien est présenté
@@ -581,8 +563,7 @@ public class ControleAccesTest {
         var porteFake = new PorteFake(horloge);
         var porteSpy = new PorteSpy(porteFake);
 
-        var badge = new Badge();
-        badge.IntervertirGrade("Technicien"); // badge technicien
+        var badge = new Badge("Technicien");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge technicien est présenté
@@ -607,8 +588,7 @@ public class ControleAccesTest {
         var porteFake = new PorteFake(horloge);
         var porteSpy = new PorteSpy(porteFake);
 
-        var badge = new Badge();
-        badge.IntervertirGrade("Toto");
+        var badge = new Badge("Toto");
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge visiteur est présenté

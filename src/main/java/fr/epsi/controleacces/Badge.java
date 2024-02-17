@@ -8,7 +8,13 @@ public class Badge implements BadgeInterface {
 
     private String _zone = "A";
 
-    public Badge() {
+    public Badge(String _grade) {
+        switch (_grade) {
+            case "Admin" -> grade = "Admin";
+            case "Technicien" -> grade = "Technicien";
+            case "Utilisateur" -> grade = "Utilisateur";
+            default -> grade = "Visiteur";
+        }
     }
 
     @Override
@@ -24,19 +30,6 @@ public class Badge implements BadgeInterface {
     @Override
     public String ObtenirGrade() {
         return grade;
-    }
-
-    @Override
-    public void IntervertirGrade(String _grade) {
-        if (_grade.equals("Admin")) {
-            grade = "Admin";
-        } else if (_grade.equals("Technicien")) {
-            grade = "Technicien";
-        } else if (_grade.equals("Utilisateur")) {
-            grade = "Utilisateur";
-        } else {
-            grade = "Visiteur";
-        }
     }
 
     @Override

@@ -7,8 +7,6 @@ public interface BadgeInterface {
 
     String ObtenirGrade();
 
-    void IntervertirGrade(String grade);
-
     void AffecterAZone(String zone);
 
     String getZone();
