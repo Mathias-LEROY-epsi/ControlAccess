@@ -20,7 +20,7 @@ public class MoteurOuverture {
             }
 
             for (var porte : lecteur.getPortes()) {
-                if (estAdministrateur) {
+                if (estAdministrateur && !porte.EstEnMaintenance()) {
                     porte.Ouvrir();
                 } else if (lecteur.peutOuvrir(badgeZone, porte.getZone())) {
                     if (porte.EstEnMaintenance()) {
