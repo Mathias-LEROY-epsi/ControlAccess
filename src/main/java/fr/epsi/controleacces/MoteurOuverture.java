@@ -24,7 +24,7 @@ public class MoteurOuverture {
                 if (porte.EstEnMaintenance() && estTechnicien) {
                     porte.Ouvrir();
                 }
-                if (!porte.EstEnMaintenance()) {
+                if (!porte.EstEnMaintenance() && !estTechnicien) {
                     if (estAdministrateur) {
                         porte.Ouvrir();
                     } else if (lecteur.peutOuvrir(badgeZone, porte.getZone())) {
