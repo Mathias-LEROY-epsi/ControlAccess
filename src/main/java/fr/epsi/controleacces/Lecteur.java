@@ -1,11 +1,13 @@
 package fr.epsi.controleacces;
 
+import fr.epsi.controleacces.utilities.BadgeInterface;
 import fr.epsi.controleacces.utilities.CalendrierInterface;
 import fr.epsi.controleacces.utilities.LecteurInterface;
 import fr.epsi.controleacces.utilities.PorteInterface;
 
 public class Lecteur implements LecteurInterface {
     private final PorteInterface[] _portes;
+    private final BadgeInterface _badge;
     private final CalendrierInterface _calendrier;
     private boolean _estAdministrateur = false;
     private boolean _aDétectéBadge = false;
@@ -39,7 +41,8 @@ public class Lecteur implements LecteurInterface {
         return _badgeBloqué;
     }
 
-    public Lecteur(CalendrierInterface calendrier, PorteInterface... portesLiées) {
+    public Lecteur(BadgeInterface badge, CalendrierInterface calendrier, PorteInterface... portesLiées) {
+        _badge = badge;
         _calendrier = calendrier;
         _portes = portesLiées;
     }
@@ -52,5 +55,15 @@ public class Lecteur implements LecteurInterface {
     @Override
     public boolean VérifierSiJourActuelEstBloqué() {
         return _calendrier.VérifierSiJourEstBloqué(_calendrier.JourActuel());
+    }
+
+    @Override
+    public boolean peutOuvrir(String badgeZone, String porteZone) {
+        return badgeZone.equals(porteZone);
+    }
+
+    @Override
+    public BadgeInterface getBadge() {
+        return _badge;
     }
 }

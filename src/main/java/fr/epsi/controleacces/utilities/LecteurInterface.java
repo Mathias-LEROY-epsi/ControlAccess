@@ -10,4 +10,8 @@ public interface LecteurInterface {
     PorteInterface[] getPortes();
 
     boolean VérifierSiJourActuelEstBloqué();
+
+    boolean peutOuvrir(String badgeZone, String porteZone);
+
+    BadgeInterface getBadge();
 }

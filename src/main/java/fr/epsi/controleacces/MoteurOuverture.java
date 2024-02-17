@@ -1,5 +1,6 @@
 package fr.epsi.controleacces;
 
+import fr.epsi.controleacces.utilities.BadgeInterface;
 import fr.epsi.controleacces.utilities.LecteurInterface;
 
 public class MoteurOuverture {
@@ -9,17 +10,28 @@ public class MoteurOuverture {
             boolean jourBloqué = lecteur.VérifierSiJourActuelEstBloqué();
             boolean estAdministrateur = lecteur.VérifierSiBagdeEstAdministrateur();
 
+            BadgeInterface badge = lecteur.getBadge();
+            String badgeZone;
+
+            if (badge == null) {
+                badgeZone = "A";
+            } else {
+                badgeZone = badge.getZone();
+            }
+
             for (var porte : lecteur.getPortes()) {
-                if (porte.EstEnMaintenance()) {
-                    continue;
-                }
-                if (estAdministrateur)
+                if (estAdministrateur) {
                     porte.Ouvrir();
-                else if (Boolean.FALSE.equals(jourBloqué) && porte.EstDansPlageHoraire() && Boolean.FALSE.equals(porte.EstBloquée()))
-                    porte.Ouvrir();
-                else {
-                    if (Boolean.FALSE.equals(jourBloqué) && aDetecteBadge && Boolean.FALSE.equals(lecteur.badgeBloqué()) && Boolean.FALSE.equals(porte.EstBloquée())) {
+                } else if (lecteur.peutOuvrir(badgeZone, porte.getZone())) {
+                    if (porte.EstEnMaintenance()) {
+                        continue;
+                    }
+                    if (!jourBloqué && porte.EstDansPlageHoraire() && !porte.EstBloquée()) {
                         porte.Ouvrir();
+                    } else {
+                        if (!jourBloqué && aDetecteBadge && !lecteur.badgeBloqué() && !porte.EstBloquée()) {
+                            porte.Ouvrir();
+                        }
                     }
                 }
             }

@@ -1,9 +1,5 @@
 package fr.epsi.controleacces.utilities;
 
-import fr.epsi.controleacces.Zone;
-
-import java.util.List;
-
 public interface BadgeInterface {
     void IntervertirBloquéDébloqué();
 
@@ -13,5 +9,7 @@ public interface BadgeInterface {
 
     void IntervertirGrade();
 
-    void AffecterAZones(List<Zone> zones);
+    void AffecterAZone(String zone);
+
+    String getZone();
 }

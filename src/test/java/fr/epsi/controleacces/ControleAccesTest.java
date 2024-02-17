@@ -2,8 +2,6 @@ package fr.epsi.controleacces;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -24,8 +22,8 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
         var badge = new Badge();
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est passé devant le lecteur
         lecteurFake.simulerDétectionBadge(badge);
@@ -48,10 +46,9 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
-
         var badge = new Badge();
         badge.IntervertirBloquéDébloqué(); // badge bloqué
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge bloqué est passé devant le lecteur
         lecteurFake.simulerDétectionBadge(badge);
@@ -74,11 +71,11 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
-
         var badge = new Badge();
         badge.IntervertirBloquéDébloqué(); // badge bloqué
         badge.IntervertirBloquéDébloqué(); // badge débloqué
+
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge bloqué puis débloqué est passé devant le lecteur
         lecteurFake.simulerDétectionBadge(badge);
@@ -101,9 +98,8 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
-
         var badge = new Badge();
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est passé devant le lecteur sans que le lecteur ne soit interrogé
         lecteurFake.simulerDétectionBadge(badge);
@@ -123,9 +119,8 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
-
         var badge = new Badge();
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est présenté
         lecteurFake.simulerDétectionBadge(badge);
@@ -149,7 +144,7 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
+        var lecteurFake = new Lecteur(null, calendrier, porteSpy);
 
         // QUAND on interroge ce lecteur sans qu'il ait détecté un badge
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -170,9 +165,8 @@ public class ControleAccesTest {
 
         porteFake.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
-
         var badge = new Badge();
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est présenté
         lecteurFake.simulerDétectionBadge(badge);
@@ -198,9 +192,8 @@ public class ControleAccesTest {
 
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
-        var lecteurFake = new Lecteur(calendrier, porteSpy1, porteSpy2);
-
         var badge = new Badge();
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy1, porteSpy2);
 
         // QUAND un badge est passé devant le lecteur
         lecteurFake.simulerDétectionBadge(badge);
@@ -228,9 +221,8 @@ public class ControleAccesTest {
         porteFake2.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
-        var lecteurFake = new Lecteur(calendrier, porteSpy1, porteSpy2);
-
         var badge = new Badge();
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy1, porteSpy2);
 
         // QUAND un badge est passé devant le lecteur
         lecteurFake.simulerDétectionBadge(badge);
@@ -258,9 +250,9 @@ public class ControleAccesTest {
         porteFake2.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
-        var lecteurFake = new Lecteur(calendrier, porteSpy1, porteSpy2);
 
         var badge = new Badge();
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy1, porteSpy2);
 
         // QUAND un badge est passé devant le lecteur
         lecteurFake.simulerDétectionBadge(badge);
@@ -284,10 +276,10 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake1 = new Lecteur(calendrier, porteSpy);
-        var lecteurFake2 = new Lecteur(calendrier, porteSpy);
-
         var badge = new Badge();
+
+        var lecteurFake1 = new Lecteur(badge, calendrier, porteSpy);
+        var lecteurFake2 = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est passé devant le deuxième lecteur
         lecteurFake2.simulerDétectionBadge(badge);
@@ -313,10 +305,10 @@ public class ControleAccesTest {
 
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
-        var lecteurFake1 = new Lecteur(calendrier, porteSpy1);
-        var lecteurFake2 = new Lecteur(calendrier, porteSpy2);
 
         var badge = new Badge();
+        var lecteurFake1 = new Lecteur(badge, calendrier, porteSpy1);
+        var lecteurFake2 = new Lecteur(badge, calendrier, porteSpy2);
 
         // QUAND un badge est passé devant le deuxième lecteur
         lecteurFake2.simulerDétectionBadge(badge);
@@ -342,10 +334,9 @@ public class ControleAccesTest {
         porteFake.DefinirPlageHoraire(8, 18);
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
-
         var badge = new Badge();
         badge.IntervertirBloquéDébloqué(); // badge bloqué
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // ET QUE l'heure actuelle est dans la plage horaire
         lecteurFake.simulerDétectionBadge(badge);
@@ -370,7 +361,7 @@ public class ControleAccesTest {
         porteFake.DefinirPlageHoraire(8, 18);
 
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
+        var lecteurFake = new Lecteur(null, calendrier, porteSpy);
 
         // ET que ce lecteur est interrogé
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -391,10 +382,10 @@ public class ControleAccesTest {
         // ET que le lecteur est interrogé un jour de la semaine
         var porteFake = new PorteFake(horloge);
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
+        var badge = new Badge();
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge est présenté
-        var badge = new Badge();
         lecteurFake.simulerDétectionBadge(badge);
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
@@ -415,11 +406,11 @@ public class ControleAccesTest {
         var porteFake = new PorteFake(horloge);
         porteFake.EstBloquée(); // porte bloquée
         var porteSpy = new PorteSpy(porteFake);
-        var lecteurFake = new Lecteur(calendrier, porteSpy);
-
-        // QUAND un badge admin est présenté
         var badge = new Badge();
         badge.IntervertirGrade(); // badge admin
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
+
+        // QUAND un badge admin est présenté
         lecteurFake.VérifierSiBagdeEstAdministrateur(badge);
         lecteurFake.simulerDétectionBadge(badge);
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
@@ -446,10 +437,10 @@ public class ControleAccesTest {
 
         var porteFake3 = new PorteFake(horloge);
         var porteSpy3 = new PorteSpy(porteFake3);
-        var lecteurFake = new Lecteur(calendrier, porteSpy1, porteSpy2, porteSpy3);
+        var badge = new Badge();
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy1, porteSpy2, porteSpy3);
 
         // QUAND un badge est présenté
-        var badge = new Badge();
         lecteurFake.simulerDétectionBadge(badge);
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
@@ -469,27 +460,23 @@ public class ControleAccesTest {
         calendrier.InitialisationDesJoursBloqués();
 
         var porteFake1 = new PorteFake(horloge);
+        porteFake1.AssocierZone("A");
         var porteSpy1 = new PorteSpy(porteFake1);
 
         var porteFake2 = new PorteFake(horloge);
+        porteFake2.AssocierZone("A");
         var porteSpy2 = new PorteSpy(porteFake2);
 
         var porteFake3 = new PorteFake(horloge);
+        porteFake3.AssocierZone("B");
         var porteSpy3 = new PorteSpy(porteFake3);
 
-        var zone1 = new Zone();
-        zone1.AjouterPortes(List.of(porteSpy1, porteSpy2));
-
-        var zone2 = new Zone();
-        zone2.AjouterPortes(List.of(porteSpy3));
-
-        // ET qu'un lecteur est relié à des portes de chaque zone
-        var lecteurFake = new Lecteur(calendrier, porteSpy1, porteSpy2, porteSpy3);
-
-        // QUAND un badge présenté est lié à une zone
+        // ET qu'un badge présenté est lié à une zone
         var badge = new Badge();
-        badge.AffecterAZones(List.of(zone1));
+        badge.AffecterAZone("A");
 
+        // Quand un lecteur est relié à des portes de chaque zone
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy1, porteSpy2, porteSpy3);
         lecteurFake.simulerDétectionBadge(badge);
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
