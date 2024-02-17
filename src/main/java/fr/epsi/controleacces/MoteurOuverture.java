@@ -9,6 +9,7 @@ public class MoteurOuverture {
             boolean aDetecteBadge = lecteur.aDétectéBadge();
             boolean jourBloqué = lecteur.VérifierSiJourActuelEstBloqué();
             boolean estAdministrateur = lecteur.VérifierSiBagdeEstAdministrateur();
+            boolean estTechnicien = lecteur.VérifierSiBagdeEstTechnicien();
 
             BadgeInterface badge = lecteur.getBadge();
             String badgeZone;
@@ -20,15 +21,17 @@ public class MoteurOuverture {
             }
 
             for (var porte : lecteur.getPortes()) {
-                if (porte.EstEnMaintenance()) {
-                    continue;
-                }
-                if (estAdministrateur) {
+                if (porte.EstEnMaintenance() && estTechnicien) {
                     porte.Ouvrir();
-                } else if (lecteur.peutOuvrir(badgeZone, porte.getZone())) {
-                    if ((Boolean.FALSE.equals(jourBloqué) && Boolean.FALSE.equals(porte.VerifierSiPorteBloquée()))) {
-                        if (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué()) {
-                            porte.Ouvrir();
+                }
+                if (!porte.EstEnMaintenance()) {
+                    if (estAdministrateur) {
+                        porte.Ouvrir();
+                    } else if (lecteur.peutOuvrir(badgeZone, porte.getZone())) {
+                        if ((Boolean.FALSE.equals(jourBloqué) && Boolean.FALSE.equals(porte.VerifierSiPorteBloquée()))) {
+                            if (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué()) {
+                                porte.Ouvrir();
+                            }
                         }
                     }
                 }

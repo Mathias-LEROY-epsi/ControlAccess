@@ -10,6 +10,7 @@ public class Lecteur implements LecteurInterface {
     private final BadgeInterface _badge;
     private final CalendrierInterface _calendrier;
     private boolean _estAdministrateur = false;
+    private boolean _estTechnicien = false;
     private boolean _aDétectéBadge = false;
     private boolean _badgeBloqué = false;
 
@@ -21,12 +22,19 @@ public class Lecteur implements LecteurInterface {
     public void VerifierLeGradeDuBadge(Badge badge) {
         if (badge.ObtenirGrade().equals("Admin")) {
             _estAdministrateur = true;
+        } else if (badge.ObtenirGrade().equals("Technicien")) {
+            _estTechnicien = true;
         }
     }
 
     @Override
     public boolean VérifierSiBagdeEstAdministrateur() {
         return _estAdministrateur;
+    }
+
+    @Override
+    public boolean VérifierSiBagdeEstTechnicien() {
+        return _estTechnicien;
     }
 
     @Override

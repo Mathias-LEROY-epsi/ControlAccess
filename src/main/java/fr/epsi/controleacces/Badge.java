@@ -30,7 +30,7 @@ public class Badge implements BadgeInterface {
     public void IntervertirGrade(String _grade) {
         if (_grade.equals("Admin")) {
             grade = "Admin";
-        } else if (grade.equals("Technicien")) {
+        } else if (_grade.equals("Technicien")) {
             grade = "Technicien";
         } else {
             grade = "Utilisateur";

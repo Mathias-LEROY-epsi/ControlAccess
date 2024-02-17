@@ -3,6 +3,8 @@ package fr.epsi.controleacces.utilities;
 public interface LecteurInterface {
     boolean VérifierSiBagdeEstAdministrateur();
 
+    boolean VérifierSiBagdeEstTechnicien();
+
     boolean aDétectéBadge();
 
     boolean badgeBloqué();
