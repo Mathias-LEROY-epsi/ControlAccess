@@ -407,7 +407,7 @@ public class ControleAccesTest {
         porteFake.IntervertirBloquéDébloqué(); // porte bloquée
         var porteSpy = new PorteSpy(porteFake);
         var badge = new Badge();
-        badge.IntervertirGrade(); // badge admin
+        badge.IntervertirGrade("Admin"); // badge admin
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge admin est présenté
@@ -433,7 +433,7 @@ public class ControleAccesTest {
         var porteSpy = new PorteSpy(porteFake);
 
         var badge = new Badge();
-        badge.IntervertirGrade(); // badge admin
+        badge.IntervertirGrade("Admin"); // badge admin
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge admin est présenté
@@ -447,7 +447,7 @@ public class ControleAccesTest {
 
     @Test
     void CasFermetureAutomatique() {
-        // ETANT DONNE que toutes les portes sont fermées de 22h à minuit (maintenance)
+        // ETANT DONNE que toutes les portes sont fermées de 23h à minuit (maintenance)
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(23);
 
@@ -510,5 +510,31 @@ public class ControleAccesTest {
         assertEquals(1, porteSpy1.VérifierOuvertureDemandée());
         assertEquals(1, porteSpy2.VérifierOuvertureDemandée());
         assertEquals(0, porteSpy3.VérifierOuvertureDemandée());
+    }
+
+    @Test
+    void CasBadgeTechnicienEnMaintenance() {
+        // ETANT DONNE que toutes les portes sont fermées de 23h à minuit (maintenance)
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(23);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
+        // ET qu'un lecteur est relié à une porte
+        var porteFake = new PorteFake(horloge);
+        var porteSpy = new PorteSpy(porteFake);
+
+        var badge = new Badge();
+        badge.IntervertirGrade("Technicien"); // badge technicien
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
+
+        // QUAND un badge technicien est présenté
+        lecteurFake.VerifierLeGradeDuBadge(badge);
+        lecteurFake.simulerDétectionBadge(badge);
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte s'ouvre
+        assertEquals(1, porteSpy.VérifierOuvertureDemandée());
     }
 }

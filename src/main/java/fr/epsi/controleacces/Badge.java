@@ -27,9 +27,11 @@ public class Badge implements BadgeInterface {
     }
 
     @Override
-    public void IntervertirGrade() {
-        if (grade.equals("Utilisateur")) {
+    public void IntervertirGrade(String _grade) {
+        if (_grade.equals("Admin")) {
             grade = "Admin";
+        } else if (grade.equals("Technicien")) {
+            grade = "Technicien";
         } else {
             grade = "Utilisateur";
         }
