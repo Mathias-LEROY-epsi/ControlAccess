@@ -563,4 +563,30 @@ public class ControleAccesTest {
         // ALORS la porte s'ouvre
         assertEquals(0, porteSpy.VérifierOuvertureDemandée());
     }
+
+    @Test
+    void CasBadgeSansGrade() {
+        // ETANT DONNE l'heure actuelle est dans la plage horaire
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(12);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
+        // ET qu'un lecteur est relié à une porte
+        var porteFake = new PorteFake(horloge);
+        var porteSpy = new PorteSpy(porteFake);
+
+        var badge = new Badge();
+        badge.IntervertirGrade("Toto");
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
+
+        // QUAND un badge visiteur est présenté
+        lecteurFake.VerifierLeGradeDuBadge(badge);
+        lecteurFake.simulerDétectionBadge(badge);
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte s'ouvre
+        assertEquals(0, porteSpy.VérifierOuvertureDemandée());
+    }
 }
