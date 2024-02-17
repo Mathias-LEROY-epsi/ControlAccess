@@ -18,7 +18,7 @@ public class Lecteur implements LecteurInterface {
         _badgeBloqué = badge.EstBloqué();
     }
 
-    public void VérifierSiBagdeEstAdministrateur(Badge badge) {
+    public void VerifierLeGradeDuBadge(Badge badge) {
         if (badge.ObtenirGrade().equals("Admin")) {
             _estAdministrateur = true;
         }

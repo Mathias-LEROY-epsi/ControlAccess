@@ -20,16 +20,14 @@ public class MoteurOuverture {
             }
 
             for (var porte : lecteur.getPortes()) {
-                if (estAdministrateur && !porte.EstEnMaintenance()) {
+                if (porte.EstEnMaintenance()) {
+                    continue;
+                }
+                if (estAdministrateur) {
                     porte.Ouvrir();
                 } else if (lecteur.peutOuvrir(badgeZone, porte.getZone())) {
-                    if (porte.EstEnMaintenance()) {
-                        continue;
-                    }
-                    if (!jourBloqué && porte.EstDansPlageHoraire() && !porte.EstBloquée()) {
-                        porte.Ouvrir();
-                    } else {
-                        if (!jourBloqué && aDetecteBadge && !lecteur.badgeBloqué() && !porte.EstBloquée()) {
+                    if ((!jourBloqué && !porte.EstBloquée())) {
+                        if (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué()) {
                             porte.Ouvrir();
                         }
                     }

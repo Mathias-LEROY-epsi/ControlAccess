@@ -411,7 +411,7 @@ public class ControleAccesTest {
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge admin est présenté
-        lecteurFake.VérifierSiBagdeEstAdministrateur(badge);
+        lecteurFake.VerifierLeGradeDuBadge(badge);
         lecteurFake.simulerDétectionBadge(badge);
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
@@ -437,11 +437,11 @@ public class ControleAccesTest {
         var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
 
         // QUAND un badge admin est présenté
-        lecteurFake.VérifierSiBagdeEstAdministrateur(badge);
+        lecteurFake.VerifierLeGradeDuBadge(badge);
         lecteurFake.simulerDétectionBadge(badge);
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
-        // ALORS aucune porte ne s'ouvre
+        // ALORS la porte ne s'ouvre pas
         assertEquals(0, porteSpy.VérifierOuvertureDemandée());
     }
 
