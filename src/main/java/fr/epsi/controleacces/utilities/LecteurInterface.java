@@ -7,6 +7,8 @@ public interface LecteurInterface {
 
     boolean VérifierSiBagdeEstUtilisateur();
 
+    boolean VérifierSiBagdeEstVisiteur();
+
     boolean aDétectéBadge();
 
     boolean badgeBloqué();

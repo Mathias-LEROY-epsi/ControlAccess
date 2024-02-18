@@ -12,6 +12,7 @@ public class Lecteur implements LecteurInterface {
     private boolean _estAdministrateur = false;
     private boolean _estTechnicien = false;
     private boolean _estUtilisateur = false;
+    private boolean _estVisiteur = false;
     private boolean _aDétectéBadge = false;
     private boolean _badgeBloqué = false;
 
@@ -27,6 +28,8 @@ public class Lecteur implements LecteurInterface {
             _estTechnicien = true;
         } else if (badge.ObtenirGrade().equals("Utilisateur")) {
             _estUtilisateur = true;
+        } else {
+            _estVisiteur = true;
         }
     }
 
@@ -43,6 +46,11 @@ public class Lecteur implements LecteurInterface {
     @Override
     public boolean VérifierSiBagdeEstUtilisateur() {
         return _estUtilisateur;
+    }
+
+    @Override
+    public boolean VérifierSiBagdeEstVisiteur() {
+        return _estVisiteur;
     }
 
     @Override

@@ -11,14 +11,13 @@ public class MoteurOuverture {
             boolean estAdministrateur = lecteur.VérifierSiBagdeEstAdministrateur();
             boolean estTechnicien = lecteur.VérifierSiBagdeEstTechnicien();
             boolean estUtilisateur = lecteur.VérifierSiBagdeEstUtilisateur();
-            boolean estVisiteur = false;
+            boolean estVisiteur = lecteur.VérifierSiBagdeEstVisiteur();
 
             BadgeInterface badge = lecteur.getBadge();
             String badgeZone;
 
-            if (badge == null) {
-                badgeZone = "A";
-                estVisiteur = true;
+            if (badge == null || estVisiteur) {
+                badgeZone = "Accueil";
             } else {
                 badgeZone = badge.getZone();
             }
