@@ -78,6 +78,7 @@ Ils ne peuvent pas non plus accéder à une porte en maintenance.
 ### 7.4. Les visiteurs
 
 Ils n'ont ni accès aux portes, ni aux zones. Ils peuvent seulement accéder à l'accueil.
+Ils ne peuvent pas accéder aux portes durant la maintenance, ni en dehors des heures d'ouverture (plage horaire).
 
 # Use Cases
 
