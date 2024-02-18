@@ -8,6 +8,7 @@ import java.util.List;
 public class PorteFake implements PorteInterface {
     private final HorlogeInterface _horloge;
     private boolean _bloquée = false;
+    private boolean _accèsRéservéAuxTechniciens = false;
     private List<Integer> _plageHoraire = List.of(8, 17);
     private List<Integer> _heureFermeture = List.of(23, 24);
     private String _zone = "A";
@@ -55,5 +56,14 @@ public class PorteFake implements PorteInterface {
     @Override
     public boolean EstDansPlageHoraire() {
         return _horloge.GetHeureActuelle() >= _plageHoraire.getFirst() && _horloge.GetHeureActuelle() <= _plageHoraire.getLast();
+    }
+
+    public void AccèsRéservéAuxTechniciens() {
+        _accèsRéservéAuxTechniciens = true;
+    }
+
+    @Override
+    public boolean VérifierSiAccèsRéservéAuxTechniciens() {
+        return _accèsRéservéAuxTechniciens;
     }
 }

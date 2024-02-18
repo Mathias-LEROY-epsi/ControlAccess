@@ -54,4 +54,9 @@ public class PorteSpy implements PorteInterface {
     public boolean EstDansPlageHoraire() {
         return _fake.EstDansPlageHoraire();
     }
+
+    @Override
+    public boolean VérifierSiAccèsRéservéAuxTechniciens() {
+        return _fake.VérifierSiAccèsRéservéAuxTechniciens();
+    }
 }

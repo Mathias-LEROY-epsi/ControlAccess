@@ -77,6 +77,10 @@ ALORS seule la porte réservée aux admins ne s'ouvre pas
 QUAND un badge administrateur est présenté  
 ALORS la porte ne s'ouvre pas
 
+25: ETANT DONNE un lecteur relié à une porte avec un accès réservé aux techniciens   (TODO)
+QUAND un badge utilisateur est présenté  
+ALORS la porte ne s'ouvre pas
+
 XX: (A VOIR) ETANT DONNE un lecteur lié à une porte avec une plage horaire non valide (plage horaire de fin avant plage
 horaire de début)   (TODO)
 QUAND l'heure actuelle est dans la plage horaire  
