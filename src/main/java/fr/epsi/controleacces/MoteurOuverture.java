@@ -31,7 +31,7 @@ public class MoteurOuverture {
                     porte.Ouvrir();
                 }
                 if (!porte.EstEnMaintenance() && !estTechnicien) {
-                    if (estAdministrateur) {
+                    if (estAdministrateur && !porte.EstUnAccèsRéservéAuxTechniciens()) {
                         porte.Ouvrir();
                     } else if (estUtilisateur && !porte.EstUnAccèsRéservéAuxTechniciens() && lecteur.peutOuvrir(badgeZone, porte.getZone())) {
                         if ((Boolean.FALSE.equals(jourBloqué) && Boolean.FALSE.equals(porte.VerifierSiPorteBloquée()))) {
