@@ -17,5 +17,5 @@ public interface PorteInterface {
 
     boolean EstDansPlageHoraire();
 
-    boolean VérifierSiAccèsRéservéAuxTechniciens();
+    boolean EstUnAccèsRéservéAuxTechniciens();
 }

@@ -63,7 +63,7 @@ public class PorteFake implements PorteInterface {
     }
 
     @Override
-    public boolean VérifierSiAccèsRéservéAuxTechniciens() {
+    public boolean EstUnAccèsRéservéAuxTechniciens() {
         return _accèsRéservéAuxTechniciens;
     }
 }

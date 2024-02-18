@@ -56,7 +56,7 @@ public class PorteSpy implements PorteInterface {
     }
 
     @Override
-    public boolean VérifierSiAccèsRéservéAuxTechniciens() {
-        return _fake.VérifierSiAccèsRéservéAuxTechniciens();
+    public boolean EstUnAccèsRéservéAuxTechniciens() {
+        return _fake.EstUnAccèsRéservéAuxTechniciens();
     }
 }
