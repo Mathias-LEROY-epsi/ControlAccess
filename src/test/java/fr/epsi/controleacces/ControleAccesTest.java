@@ -651,4 +651,31 @@ public class ControleAccesTest {
         // ALORS la porte ne s'ouvre pas
         assertEquals(0, porteSpy.VérifierOuvertureDemandée());
     }
+
+    @Test
+    void CasPorteBloquéeHorsMaintenanceBadgeTechnicien() {
+        // ETANT DONNE un lecteur lié à une porte bloquée hors maintenance
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(12);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
+        // ET que cette porte possède un accès réservé aux techniciens
+        var porteFake = new PorteFake(horloge);
+        porteFake.IntervertirBloquéDébloqué(); // porte bloquée
+        porteFake.AccèsRéservéAuxTechniciens();
+        var porteSpy = new PorteSpy(porteFake);
+
+        var badge = new Badge("Technicien");
+        var lecteurFake = new Lecteur(badge, calendrier, porteSpy);
+
+        // QUAND un badge technicien est présenté
+        lecteurFake.VerifierLeGradeDuBadge(badge);
+        lecteurFake.simulerDétectionBadge(badge);
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte s'ouvre
+        assertEquals(1, porteSpy.VérifierOuvertureDemandée());
+    }
 }

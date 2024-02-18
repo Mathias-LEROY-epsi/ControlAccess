@@ -33,10 +33,10 @@ QUAND un badge est présenté
 ET que la zone est bloquée
 ALORS les portes ne s'ouvrent pas
 
-18: ETANT DONNE un lecteur lié à une porte  (TODO)
+18: ETANT DONNE un lecteur lié à une porte bloquée hors maintenance (TODO)
+ET que cette porte possède un accès réservé aux techniciens  
 QUAND un badge technicien est présenté  
-ET qu'on souhaite bloquer cette porte
-ALORS la porte ne se bloque pas
+ALORS la porte s'ouvre
 
 19: ETANT DONNE un lecteur lié à une zone qui regroupe des portes  (TODO)
 QUAND un badge administrateur est présenté  
