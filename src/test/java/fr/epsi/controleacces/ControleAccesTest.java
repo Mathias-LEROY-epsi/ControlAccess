@@ -538,7 +538,7 @@ public class ControleAccesTest {
         var zone1 = new Zone("A", porteSpy1, porteSpy2);
         var zone2 = new Zone("B", porteSpy3);
 
-        // ET qu'un badge présenté est lié à une zone
+        // ET qu'un badge utilisateur présenté est lié à une zone
         var badge = new Badge("Utilisateur");
         badge.AffecterAZone("A");
 
@@ -578,7 +578,7 @@ public class ControleAccesTest {
         var zone1 = new Zone("A", porteSpy1, porteSpy2);
         var zone2 = new Zone("B", porteSpy3);
 
-        // ET qu'un badge présenté est lié à une zone
+        // ET qu'un badge technicien présenté est lié à une zone
         var badge = new Badge("Technicien");
         badge.AffecterAZone("A");
 

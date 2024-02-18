@@ -38,7 +38,8 @@ public class MoteurOuverture {
                             }
                         }
                         if (estTechnicien) {
-                            if (porte.EstUnAccèsRéservéAuxTechniciens()) {
+                            if (porte.EstUnAccèsRéservéAuxTechniciens()
+                                    && lecteur.peutOuvrir(badgeZone, zone.getZone())) {
                                 porte.Ouvrir();
                             }
                         }
