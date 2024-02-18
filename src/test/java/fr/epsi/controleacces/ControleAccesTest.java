@@ -162,6 +162,7 @@ public class ControleAccesTest {
         var lecteurFake = new Lecteur(null, calendrier, zone);
 
         // QUAND on interroge ce lecteur sans qu'il ait détecté un badge
+        lecteurFake.DéfinirCommeVisiteur();
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
         // ALORS la porte n'est pas deverrouillée
@@ -398,6 +399,7 @@ public class ControleAccesTest {
         var lecteurFake = new Lecteur(null, calendrier, zone);
 
         // ET que ce lecteur est interrogé
+        lecteurFake.DéfinirCommeVisiteur();
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
         // ALORS la porte est deverrouillée
@@ -728,7 +730,7 @@ public class ControleAccesTest {
 
     @Test
     void CasPorteAccèsRéservéAuxVisiteursBadgeVisiteur() {
-        // ETANT DONNE un lecteur relié à une porte avec un accès réservé aux techniciens
+        // ETANT DONNE un lecteur relié à une porte avec un accès réservé aux visiteurs
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(12);
 
@@ -746,10 +748,11 @@ public class ControleAccesTest {
         var zone2 = new Zone("A", porteSpy2);
         var lecteurFake = new Lecteur(null, calendrier, zone, zone2);
 
-        // QUAND un badge admin est présenté
+        // QUAND on interroge le lecteur
+        lecteurFake.DéfinirCommeVisiteur();
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
-        // ALORS la porte ne s'ouvre pas
+        // ALORS seule la porte de l'accueil s'ouvre
         assertEquals(1, porteSpy.VérifierOuvertureDemandée());
         assertEquals(0, porteSpy2.VérifierOuvertureDemandée());
     }

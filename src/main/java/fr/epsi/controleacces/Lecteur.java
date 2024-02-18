@@ -28,9 +28,11 @@ public class Lecteur implements LecteurInterface {
             _estTechnicien = true;
         } else if (badge.ObtenirGrade().equals("Utilisateur")) {
             _estUtilisateur = true;
-        } else {
-            _estVisiteur = true;
         }
+    }
+
+    public void DéfinirCommeVisiteur() {
+        _estVisiteur = true;
     }
 
     @Override

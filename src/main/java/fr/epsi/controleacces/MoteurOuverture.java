@@ -24,8 +24,8 @@ public class MoteurOuverture {
 
             for (var zone : lecteur.getZones()) {
                 for (var porte : zone.getPortes()) {
-                    if (estVisiteur) {
-                        continue;
+                    if (estVisiteur && lecteur.peutOuvrir(badgeZone, zone.getZone())) {
+                        porte.Ouvrir();
                     }
                     if (porte.EstEnMaintenance() && estTechnicien) {
                         porte.Ouvrir();
