@@ -744,7 +744,7 @@ public class ControleAccesTest {
     }
 
     @Test
-    void CasPorteAccèsRéservéAuxVisiteursBadgeVisiteur() {
+    void CasPorteAccèsRéservéAuxVisiteursVisiteur() {
         // ETANT DONNE un lecteur relié à une porte avec un accès réservé aux visiteurs
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(12);
@@ -891,5 +891,29 @@ public class ControleAccesTest {
         // ALORS aucune porte ne s'ouvre
         assertEquals(0, porteSpy.VérifierOuvertureDemandée());
         assertEquals(0, porteSpy2.VérifierOuvertureDemandée());
+    }
+
+    @Test
+    void CasVisiteurEnMaintenance() {
+        // ETANT DONNE que toutes les portes sont fermées de 23h à minuit (maintenance)
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(23);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
+        // ET qu'un lecteur est relié à une porte
+        var porteFake = new PorteFake(horloge);
+        var porteSpy = new PorteSpy(porteFake);
+
+        var zone = new Zone("Accueil", porteSpy);
+        var lecteurFake = new Lecteur(null, calendrier, zone);
+
+        // QUAND un badge technicien est présenté
+        lecteurFake.DéfinirCommeVisiteur();
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte ne s'ouvre pas
+        assertEquals(0, porteSpy.VérifierOuvertureDemandée());
     }
 }
