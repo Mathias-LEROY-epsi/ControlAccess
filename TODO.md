@@ -73,11 +73,11 @@ QUAND un badge utilisateur est présenté
 ET que cette zone comporte une porte avec un accès réservé aux admins
 ALORS seule la porte réservée aux admins ne s'ouvre pas
 
-25: ETANT DONNE un lecteur relié à une porte avec un accès réservé aux techniciens   (TODO)
+25: ETANT DONNE un lecteur relié à une porte avec un accès réservé aux techniciens   
 QUAND un badge administrateur est présenté  
 ALORS la porte ne s'ouvre pas
 
-25: ETANT DONNE un lecteur relié à une porte avec un accès réservé aux techniciens   (TODO)
+25: ETANT DONNE un lecteur relié à une porte avec un accès réservé aux techniciens   
 QUAND un badge utilisateur est présenté  
 ALORS la porte ne s'ouvre pas
 

@@ -30,16 +30,17 @@ public class MoteurOuverture {
                 if (porte.EstEnMaintenance() && estTechnicien) {
                     porte.Ouvrir();
                 }
-                if (!porte.EstEnMaintenance() && !estTechnicien) {
-                    if (estAdministrateur && !porte.EstUnAccèsRéservéAuxTechniciens()) {
+                if (!porte.EstEnMaintenance() && !estTechnicien && (!porte.EstUnAccèsRéservéAuxTechniciens())) {
+                    if (estAdministrateur) {
                         porte.Ouvrir();
-                    } else if (estUtilisateur && !porte.EstUnAccèsRéservéAuxTechniciens() && lecteur.peutOuvrir(badgeZone, porte.getZone())) {
+                    } else if (estUtilisateur && lecteur.peutOuvrir(badgeZone, porte.getZone())) {
                         if ((Boolean.FALSE.equals(jourBloqué) && Boolean.FALSE.equals(porte.VerifierSiPorteBloquée()))) {
                             if (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué()) {
                                 porte.Ouvrir();
                             }
                         }
                     }
+
                 }
             }
         }
