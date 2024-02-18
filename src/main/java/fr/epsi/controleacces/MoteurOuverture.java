@@ -30,6 +30,9 @@ public class MoteurOuverture {
                 if (porte.EstEnMaintenance() && estTechnicien) {
                     porte.Ouvrir();
                 }
+                if (!porte.EstEnMaintenance() && porte.EstUnAccèsRéservéAuxTechniciens() && estTechnicien) {
+                    porte.Ouvrir();
+                }
                 if (!porte.EstEnMaintenance() && !estTechnicien && (!porte.EstUnAccèsRéservéAuxTechniciens())) {
                     if (estAdministrateur) {
                         porte.Ouvrir();
