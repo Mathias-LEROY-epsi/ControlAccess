@@ -28,7 +28,7 @@ public class Zone implements ZoneInterface {
     }
 
     @Override
-    public boolean VerifierSiZoneEstBloquée() {
+    public boolean EstBloquée() {
         return _bloquée;
     }
 }

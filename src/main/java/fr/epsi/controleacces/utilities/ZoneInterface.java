@@ -5,5 +5,5 @@ public interface ZoneInterface {
 
     String getZone();
 
-    boolean VerifierSiZoneEstBloquée();
+    boolean EstBloquée();
 }

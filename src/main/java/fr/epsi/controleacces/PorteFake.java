@@ -24,7 +24,7 @@ public class PorteFake implements PorteInterface {
     }
 
     @Override
-    public boolean VerifierSiPorteBloquée() {
+    public boolean EstBloquée() {
         return _bloquée;
     }
 

@@ -39,7 +39,7 @@ public class MoteurOuverture {
                             if (estAdministrateur) {
                                 porte.Ouvrir();
                             } else if (estUtilisateur && lecteur.peutOuvrir(badgeZone, zone.getZone())) {
-                                if ((Boolean.FALSE.equals(jourBloqué) && Boolean.FALSE.equals(porte.VerifierSiPorteBloquée()))) {
+                                if (!jourBloqué && !porte.EstBloquée() && !zone.EstBloquée()) {
                                     if (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué()) {
                                         porte.Ouvrir();
                                     }
