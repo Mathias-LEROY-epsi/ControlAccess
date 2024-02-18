@@ -909,7 +909,31 @@ public class ControleAccesTest {
         var zone = new Zone("Accueil", porteSpy);
         var lecteurFake = new Lecteur(null, calendrier, zone);
 
-        // QUAND un badge technicien est présenté
+        // QUAND un visiteur interroge le lecteur
+        lecteurFake.DéfinirCommeVisiteur();
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte ne s'ouvre pas
+        assertEquals(0, porteSpy.VérifierOuvertureDemandée());
+    }
+
+    @Test
+    void CasVisiteurHorsPlageHoraire() {
+        // ETANT DONNE un lecteur relié à une porte
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(19);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
+        // ET que l'heure actuelle est hors de la plage horaire
+        var porteFake = new PorteFake(horloge);
+        var porteSpy = new PorteSpy(porteFake);
+
+        var zone = new Zone("Accueil", porteSpy);
+        var lecteurFake = new Lecteur(null, calendrier, zone);
+
+        // QUAND un visiteur interroge le lecteur
         lecteurFake.DéfinirCommeVisiteur();
         MoteurOuverture.InterrogerLecteurs(lecteurFake);
 
