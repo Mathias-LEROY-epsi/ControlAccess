@@ -2,6 +2,8 @@ package fr.epsi.controleacces;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,6 +25,7 @@ public class ControleAccesTest {
 
         var porteSpy = new PorteSpy(porteFake);
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
 
         var zone = new Zone("A", porteSpy);
         var lecteurFake = new Lecteur(badge, calendrier, zone);
@@ -78,6 +81,7 @@ public class ControleAccesTest {
 
         var porteSpy = new PorteSpy(porteFake);
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
         badge.IntervertirBloquéDébloqué(); // badge bloqué
         badge.IntervertirBloquéDébloqué(); // badge débloqué
 
@@ -131,6 +135,7 @@ public class ControleAccesTest {
 
         var porteSpy = new PorteSpy(porteFake);
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
 
         var zone = new Zone("A", porteSpy);
         var lecteurFake = new Lecteur(badge, calendrier, zone);
@@ -212,6 +217,7 @@ public class ControleAccesTest {
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
 
         var zone = new Zone("A", porteSpy1, porteSpy2);
         var lecteurFake = new Lecteur(badge, calendrier, zone);
@@ -244,6 +250,7 @@ public class ControleAccesTest {
         var porteSpy1 = new PorteSpy(porteFake1);
         var porteSpy2 = new PorteSpy(porteFake2);
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
 
         var zone = new Zone("A", porteSpy1, porteSpy2);
         var lecteurFake = new Lecteur(badge, calendrier, zone);
@@ -277,6 +284,8 @@ public class ControleAccesTest {
         var porteSpy2 = new PorteSpy(porteFake2);
 
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
+
         var zone = new Zone("A", porteSpy1, porteSpy2);
         var lecteurFake = new Lecteur(badge, calendrier, zone);
 
@@ -304,6 +313,8 @@ public class ControleAccesTest {
 
         var porteSpy = new PorteSpy(porteFake);
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
+
         var zone = new Zone("A", porteSpy);
         var lecteurFake1 = new Lecteur(badge, calendrier, zone);
         var lecteurFake2 = new Lecteur(badge, calendrier, zone);
@@ -335,6 +346,8 @@ public class ControleAccesTest {
         var porteSpy2 = new PorteSpy(porteFake2);
 
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
+
         var zone = new Zone("A", porteSpy1);
         var zoneBis = new Zone("A", porteSpy2);
         var lecteurFake1 = new Lecteur(badge, calendrier, zone);
@@ -366,6 +379,7 @@ public class ControleAccesTest {
 
         var porteSpy = new PorteSpy(porteFake);
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
         badge.IntervertirBloquéDébloqué(); // badge bloqué
 
         var zone = new Zone("A", porteSpy);
@@ -419,6 +433,7 @@ public class ControleAccesTest {
         var porteFake = new PorteFake(horloge);
         var porteSpy = new PorteSpy(porteFake);
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
 
         var zone = new Zone("A", porteSpy);
         var lecteurFake = new Lecteur(badge, calendrier, zone);
@@ -542,7 +557,7 @@ public class ControleAccesTest {
 
         // ET qu'un badge utilisateur présenté est lié à une zone
         var badge = new Badge("Utilisateur");
-        badge.AffecterAZone("A");
+        badge.AffecterAZones(List.of("A"));
 
         // Quand un lecteur est relié à des portes de chaque zone
         var lecteurFake = new Lecteur(badge, calendrier, zone1, zone2);
@@ -582,7 +597,7 @@ public class ControleAccesTest {
 
         // ET qu'un badge technicien présenté est lié à une zone
         var badge = new Badge("Technicien");
-        badge.AffecterAZone("A");
+        badge.AffecterAZones(List.of("A"));
 
         // Quand un lecteur est relié à des portes de chaque zone
         var lecteurFake = new Lecteur(badge, calendrier, zone1, zone2);
@@ -758,7 +773,7 @@ public class ControleAccesTest {
     }
 
     @Test
-    void CasPorteAccèsRéservéAuxVisiteursBadgeUtilisateur() {
+    void CasPorteAccèsRéservéAuxVisiteursBadgeAutreQueVisiteur() {
         // ETANT DONNE un lecteur relié à une porte avec un accès réservé aux visiteurs
         var horloge = new Horloge();
         horloge.DefinirHeureActuelle(12);
@@ -775,8 +790,9 @@ public class ControleAccesTest {
 
         var zone = new Zone("Accueil", porteSpy);
         var zone2 = new Zone("A", porteSpy2);
-        
+
         var badge = new Badge("Utilisateur");
+        badge.AffecterAZones(List.of("A"));
         var lecteurFake = new Lecteur(badge, calendrier, zone, zone2);
 
         // QUAND on interroge le lecteur
@@ -832,6 +848,8 @@ public class ControleAccesTest {
         var porteSpy = new PorteSpy(porteFake);
 
         var badge = new Badge("Technicien");
+        badge.AffecterAZones(List.of("A"));
+
         var zone = new Zone("A", porteSpy);
         var lecteurFake = new Lecteur(badge, calendrier, zone);
 

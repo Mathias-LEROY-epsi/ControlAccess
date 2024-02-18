@@ -1,5 +1,7 @@
 package fr.epsi.controleacces.utilities;
 
+import java.util.List;
+
 public interface LecteurInterface {
     boolean VérifierSiBagdeEstAdministrateur();
 
@@ -17,7 +19,7 @@ public interface LecteurInterface {
 
     boolean VérifierSiJourActuelEstBloqué();
 
-    boolean peutOuvrir(String badgeZone, String zone);
+    boolean peutOuvrir(List<String> badgeZone, String zone);
 
     BadgeInterface getBadge();
 }

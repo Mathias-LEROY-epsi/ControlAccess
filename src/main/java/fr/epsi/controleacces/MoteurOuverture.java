@@ -3,6 +3,8 @@ package fr.epsi.controleacces;
 import fr.epsi.controleacces.utilities.BadgeInterface;
 import fr.epsi.controleacces.utilities.LecteurInterface;
 
+import java.util.List;
+
 public class MoteurOuverture {
     public static void InterrogerLecteurs(LecteurInterface... lecteurs) {
         for (var lecteur : lecteurs) {
@@ -14,12 +16,12 @@ public class MoteurOuverture {
             boolean estVisiteur = lecteur.VérifierSiBagdeEstVisiteur();
 
             BadgeInterface badge = lecteur.getBadge();
-            String badgeZone;
+            List<String> badgeZone;
 
             if (badge == null || estVisiteur) {
-                badgeZone = "Accueil";
+                badgeZone = List.of("Accueil");
             } else {
-                badgeZone = badge.getZone();
+                badgeZone = badge.getZones();
             }
 
             for (var zone : lecteur.getZones()) {

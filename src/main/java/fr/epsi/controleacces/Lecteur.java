@@ -5,6 +5,8 @@ import fr.epsi.controleacces.utilities.CalendrierInterface;
 import fr.epsi.controleacces.utilities.LecteurInterface;
 import fr.epsi.controleacces.utilities.ZoneInterface;
 
+import java.util.List;
+
 public class Lecteur implements LecteurInterface {
     private final ZoneInterface[] _zones;
     private final BadgeInterface _badge;
@@ -84,8 +86,8 @@ public class Lecteur implements LecteurInterface {
     }
 
     @Override
-    public boolean peutOuvrir(String badgeZone, String porteZone) {
-        return badgeZone.equals(porteZone);
+    public boolean peutOuvrir(List<String> badgeZone, String porteZone) {
+        return badgeZone.stream().anyMatch(badge -> badge.equals(porteZone));
     }
 
     @Override
