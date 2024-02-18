@@ -3,10 +3,10 @@ package fr.epsi.controleacces;
 import fr.epsi.controleacces.utilities.BadgeInterface;
 import fr.epsi.controleacces.utilities.CalendrierInterface;
 import fr.epsi.controleacces.utilities.LecteurInterface;
-import fr.epsi.controleacces.utilities.PorteInterface;
+import fr.epsi.controleacces.utilities.ZoneInterface;
 
 public class Lecteur implements LecteurInterface {
-    private final PorteInterface[] _portes;
+    private final ZoneInterface[] _zones;
     private final BadgeInterface _badge;
     private final CalendrierInterface _calendrier;
     private boolean _estAdministrateur = false;
@@ -57,15 +57,15 @@ public class Lecteur implements LecteurInterface {
         return _badgeBloqué;
     }
 
-    public Lecteur(BadgeInterface badge, CalendrierInterface calendrier, PorteInterface... portesLiées) {
+    public Lecteur(BadgeInterface badge, CalendrierInterface calendrier, ZoneInterface... zoneLiées) {
         _badge = badge;
         _calendrier = calendrier;
-        _portes = portesLiées;
+        _zones = zoneLiées;
     }
 
     @Override
-    public PorteInterface[] getPortes() {
-        return _portes;
+    public ZoneInterface[] getZones() {
+        return _zones;
     }
 
     @Override

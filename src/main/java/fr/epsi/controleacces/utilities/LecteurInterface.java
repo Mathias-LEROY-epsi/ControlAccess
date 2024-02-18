@@ -11,11 +11,11 @@ public interface LecteurInterface {
 
     boolean badgeBloqué();
 
-    PorteInterface[] getPortes();
+    ZoneInterface[] getZones();
 
     boolean VérifierSiJourActuelEstBloqué();
 
-    boolean peutOuvrir(String badgeZone, String porteZone);
+    boolean peutOuvrir(String badgeZone, String zone);
 
     BadgeInterface getBadge();
 }

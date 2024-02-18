@@ -5,8 +5,6 @@ public interface PorteInterface {
 
     void DefinirFermetureMaintenance(Integer _heureDébut, Integer _heureFin);
 
-    String getZone();
-
     void IntervertirBloquéDébloqué();
 
     boolean VerifierSiPorteBloquée();

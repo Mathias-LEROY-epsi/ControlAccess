@@ -29,18 +29,18 @@ QUAND un badge administrateur est présenté
 ALORS les portes s'ouvrent
 
 18: ETANT DONNE un lecteur lié à une zone qui regroupe des portes  (TODO)
-QUAND un badge est présenté  
 ET que la zone est bloquée
+QUAND un badge utilisateur est présenté  
 ALORS les portes ne s'ouvrent pas
 
-18: ETANT DONNE un lecteur lié à une porte bloquée hors maintenance (TODO)
+18: ETANT DONNE un lecteur lié à une porte bloquée hors maintenance
 ET que cette porte possède un accès réservé aux techniciens  
 QUAND un badge technicien est présenté  
 ALORS la porte s'ouvre
 
 19: ETANT DONNE un lecteur lié à une zone qui regroupe des portes  (TODO)
-QUAND un badge administrateur est présenté  
 ET que la zone est bloquée
+QUAND un badge administrateur est présenté  
 ALORS les portes s'ouvrent
 
 21: ETANT DONNE un lecteur relié à une porte  

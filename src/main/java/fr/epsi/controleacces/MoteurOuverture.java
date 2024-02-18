@@ -23,28 +23,30 @@ public class MoteurOuverture {
                 badgeZone = badge.getZone();
             }
 
-            for (var porte : lecteur.getPortes()) {
-                if (estVisiteur) {
-                    continue;
-                }
-                if (porte.EstEnMaintenance() && estTechnicien) {
-                    porte.Ouvrir();
-                }
-                if (!porte.EstEnMaintenance()) {
-                    if (estTechnicien && porte.EstUnAccèsRéservéAuxTechniciens()) {
+            for (var zone : lecteur.getZones()) {
+                for (var porte : zone.getPortes()) {
+                    if (estVisiteur) {
+                        continue;
+                    }
+                    if (porte.EstEnMaintenance() && estTechnicien) {
                         porte.Ouvrir();
                     }
-                    if (!estTechnicien && !porte.EstUnAccèsRéservéAuxTechniciens()) {
-                        if (estAdministrateur) {
+                    if (!porte.EstEnMaintenance()) {
+                        if (estTechnicien && porte.EstUnAccèsRéservéAuxTechniciens()) {
                             porte.Ouvrir();
-                        } else if (estUtilisateur && lecteur.peutOuvrir(badgeZone, porte.getZone())) {
-                            if ((Boolean.FALSE.equals(jourBloqué) && Boolean.FALSE.equals(porte.VerifierSiPorteBloquée()))) {
-                                if (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué()) {
-                                    porte.Ouvrir();
+                        }
+                        if (!estTechnicien && !porte.EstUnAccèsRéservéAuxTechniciens()) {
+                            if (estAdministrateur) {
+                                porte.Ouvrir();
+                            } else if (estUtilisateur && lecteur.peutOuvrir(badgeZone, zone.getZone())) {
+                                if ((Boolean.FALSE.equals(jourBloqué) && Boolean.FALSE.equals(porte.VerifierSiPorteBloquée()))) {
+                                    if (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué()) {
+                                        porte.Ouvrir();
+                                    }
                                 }
                             }
-                        }
 
+                        }
                     }
                 }
             }

@@ -41,11 +41,6 @@ public class PorteSpy implements PorteInterface {
     }
 
     @Override
-    public String getZone() {
-        return _fake.getZone();
-    }
-
-    @Override
     public boolean EstEnMaintenance() {
         return _fake.EstEnMaintenance();
     }

@@ -11,22 +11,12 @@ public class PorteFake implements PorteInterface {
     private boolean _accèsRéservéAuxTechniciens = false;
     private List<Integer> _plageHoraire = List.of(8, 17);
     private List<Integer> _heureFermeture = List.of(23, 24);
-    private String _zone = "A";
 
     public PorteFake(HorlogeInterface horloge) {
         _horloge = horloge;
     }
 
     public void Ouvrir() {
-    }
-
-    public void AssocierZone(String zone) {
-        _zone = zone;
-    }
-
-    @Override
-    public String getZone() {
-        return _zone;
     }
 
     public void IntervertirBloquéDébloqué() {
