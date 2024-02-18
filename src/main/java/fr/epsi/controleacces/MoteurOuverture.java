@@ -32,21 +32,23 @@ public class MoteurOuverture {
                         porte.Ouvrir();
                     }
                     if (!porte.EstEnMaintenance()) {
-                        if (estTechnicien && porte.EstUnAccèsRéservéAuxTechniciens()) {
-                            porte.Ouvrir();
-                        }
-                        if (!estTechnicien && !porte.EstUnAccèsRéservéAuxTechniciens()) {
-                            if (estAdministrateur) {
+                        if (estAdministrateur) {
+                            if (!porte.EstUnAccèsRéservéAuxTechniciens()) {
                                 porte.Ouvrir();
-                            } else if (estUtilisateur && lecteur.peutOuvrir(badgeZone, zone.getZone())
-                                    && !porte.EstUnAccèsRéservéAuxAdmins()) {
-                                if (!jourBloqué && !porte.EstBloquée() && !zone.EstBloquée()) {
-                                    if (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué()) {
-                                        porte.Ouvrir();
-                                    }
-                                }
                             }
-
+                        }
+                        if (estTechnicien) {
+                            if (porte.EstUnAccèsRéservéAuxTechniciens()) {
+                                porte.Ouvrir();
+                            }
+                        }
+                        if (estUtilisateur) {
+                            if (!porte.EstUnAccèsRéservéAuxTechniciens() && !porte.EstUnAccèsRéservéAuxAdmins()
+                                    && (lecteur.peutOuvrir(badgeZone, zone.getZone())
+                                    && (!jourBloqué && !porte.EstBloquée() && !zone.EstBloquée()
+                                    && (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué())))) {
+                                porte.Ouvrir();
+                            }
                         }
                     }
                 }
