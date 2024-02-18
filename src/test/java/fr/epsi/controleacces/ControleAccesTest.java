@@ -687,6 +687,33 @@ public class ControleAccesTest {
     }
 
     @Test
+    void CasPorteAccèsRéservéAuxAdminsBadgeutilisateur() {
+        // ETANT DONNE un lecteur relié à une porte avec un accès réservé aux techniciens
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(12);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
+        // ET qu'un lecteur est relié à une porte
+        var porteFake = new PorteFake(horloge);
+        porteFake.AccèsRéservéAuxAdmins();
+        var porteSpy = new PorteSpy(porteFake);
+
+        var badge = new Badge("Utilisateur");
+        var zone = new Zone("A", porteSpy);
+        var lecteurFake = new Lecteur(badge, calendrier, zone);
+
+        // QUAND un badge admin est présenté
+        lecteurFake.VerifierLeGradeDuBadge(badge);
+        lecteurFake.simulerDétectionBadge(badge);
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS la porte ne s'ouvre pas
+        assertEquals(0, porteSpy.VérifierOuvertureDemandée());
+    }
+
+    @Test
     void CasPorteBloquéeHorsMaintenanceBadgeTechnicien() {
         // ETANT DONNE un lecteur lié à une porte bloquée hors maintenance
         var horloge = new Horloge();

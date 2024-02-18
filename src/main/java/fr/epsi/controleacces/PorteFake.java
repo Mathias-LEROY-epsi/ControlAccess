@@ -9,6 +9,7 @@ public class PorteFake implements PorteInterface {
     private final HorlogeInterface _horloge;
     private boolean _bloquée = false;
     private boolean _accèsRéservéAuxTechniciens = false;
+    private boolean _accèsRéservéAuxAdmins = false;
     private List<Integer> _plageHoraire = List.of(8, 17);
     private List<Integer> _heureFermeture = List.of(23, 24);
 
@@ -55,5 +56,14 @@ public class PorteFake implements PorteInterface {
     @Override
     public boolean EstUnAccèsRéservéAuxTechniciens() {
         return _accèsRéservéAuxTechniciens;
+    }
+
+    public void AccèsRéservéAuxAdmins() {
+        _accèsRéservéAuxAdmins = true;
+    }
+
+    @Override
+    public boolean EstUnAccèsRéservéAuxAdmins() {
+        return _accèsRéservéAuxAdmins;
     }
 }
