@@ -30,7 +30,7 @@ public class MoteurOuverture {
                         porte.Ouvrir();
                     }
                     if (!porte.EstEnMaintenance()) {
-                        if (estVisiteur && lecteur.peutOuvrir(badgeZone, zone.getZone())) {
+                        if (estVisiteur && lecteur.peutOuvrir(badgeZone, zone.getZone()) && porte.EstDansPlageHoraire()) {
                             porte.Ouvrir();
                         }
                         if (estAdministrateur) {
