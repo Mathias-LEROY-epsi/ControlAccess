@@ -58,7 +58,7 @@ public class Lecteur implements LecteurInterface {
     }
 
     @Override
-    public boolean aDétectéBadge() {
+    public boolean VérifierSiBadgeDétecté() {
         var val = _aDétectéBadge;
         _aDétectéBadge = false;
         return val;

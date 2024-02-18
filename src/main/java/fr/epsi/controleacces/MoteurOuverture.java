@@ -2,59 +2,70 @@ package fr.epsi.controleacces;
 
 import fr.epsi.controleacces.utilities.BadgeInterface;
 import fr.epsi.controleacces.utilities.LecteurInterface;
+import fr.epsi.controleacces.utilities.PorteInterface;
+import fr.epsi.controleacces.utilities.ZoneInterface;
 
 import java.util.List;
 
 public class MoteurOuverture {
     public static void InterrogerLecteurs(LecteurInterface... lecteurs) {
         for (var lecteur : lecteurs) {
-            boolean aDetecteBadge = lecteur.aDétectéBadge();
-            boolean jourBloqué = lecteur.VérifierSiJourActuelEstBloqué();
-            boolean estAdministrateur = lecteur.VérifierSiBagdeEstAdministrateur();
-            boolean estTechnicien = lecteur.VérifierSiBagdeEstTechnicien();
-            boolean estUtilisateur = lecteur.VérifierSiBagdeEstUtilisateur();
-            boolean estVisiteur = lecteur.VérifierSiBagdeEstVisiteur();
-
             BadgeInterface badge = lecteur.getBadge();
-            List<String> badgeZone;
-
-            if (badge == null || estVisiteur) {
-                badgeZone = List.of("Accueil");
-            } else {
-                badgeZone = badge.getZones();
-            }
+            Boolean aBadgé = lecteur.VérifierSiBadgeDétecté();
+            List<String> badgeZone = getBadgeZone(lecteur, badge);
 
             for (var zone : lecteur.getZones()) {
                 for (var porte : zone.getPortes()) {
-                    if (porte.EstEnMaintenance() && estTechnicien) {
-                        porte.Ouvrir();
-                    }
-                    if (!porte.EstEnMaintenance()) {
-                        if (estVisiteur && lecteur.peutOuvrir(badgeZone, zone.getZone()) && porte.EstDansPlageHoraire()) {
-                            porte.Ouvrir();
-                        }
-                        if (estAdministrateur) {
-                            if (!porte.EstUnAccèsRéservéAuxTechniciens()) {
-                                porte.Ouvrir();
-                            }
-                        }
-                        if (estTechnicien) {
-                            if (porte.EstUnAccèsRéservéAuxTechniciens()
-                                    && lecteur.peutOuvrir(badgeZone, zone.getZone())) {
-                                porte.Ouvrir();
-                            }
-                        }
-                        if (estUtilisateur) {
-                            if (!porte.EstUnAccèsRéservéAuxTechniciens() && !porte.EstUnAccèsRéservéAuxAdmins()
-                                    && (lecteur.peutOuvrir(badgeZone, zone.getZone())
-                                    && (!jourBloqué && !porte.EstBloquée() && !zone.EstBloquée()
-                                    && (porte.EstDansPlageHoraire() || aDetecteBadge && !lecteur.badgeBloqué())))) {
-                                porte.Ouvrir();
-                            }
-                        }
+                    if (porte.EstEnMaintenance()) {
+                        handleMaintenanceMode(lecteur, porte);
+                    } else {
+                        handleNormalMode(lecteur, aBadgé, badgeZone, zone, porte);
                     }
                 }
             }
         }
+    }
+
+    private static List<String> getBadgeZone(LecteurInterface lecteur, BadgeInterface badge) {
+        if (badge == null || lecteur.VérifierSiBagdeEstVisiteur()) {
+            return List.of("Accueil");
+        } else {
+            return badge.getZones();
+        }
+    }
+
+    private static void handleMaintenanceMode(LecteurInterface lecteur, PorteInterface porte) {
+        if (lecteur.VérifierSiBagdeEstTechnicien()) {
+            porte.Ouvrir();
+        }
+    }
+
+    private static void handleNormalMode(LecteurInterface lecteur, Boolean aBadgé,
+                                         List<String> badgeZone, ZoneInterface zone, PorteInterface porte) {
+        if (lecteur.VérifierSiBagdeEstVisiteur()
+                && lecteur.peutOuvrir(badgeZone, zone.getZone()) && porte.EstDansPlageHoraire()) {
+            porte.Ouvrir();
+        }
+        if (lecteur.VérifierSiBagdeEstAdministrateur() && !porte.EstUnAccèsRéservéAuxTechniciens()) {
+            porte.Ouvrir();
+        }
+        if (lecteur.VérifierSiBagdeEstTechnicien()
+                && porte.EstUnAccèsRéservéAuxTechniciens() && lecteur.peutOuvrir(badgeZone, zone.getZone())) {
+            porte.Ouvrir();
+        }
+        if (lecteur.VérifierSiBagdeEstUtilisateur() && canUserOpenDoor(lecteur, aBadgé, badgeZone, zone, porte)) {
+            porte.Ouvrir();
+        }
+    }
+
+    private static boolean canUserOpenDoor(LecteurInterface lecteur, Boolean aBadgé,
+                                           List<String> badgeZone, ZoneInterface zone, PorteInterface porte) {
+        return !porte.EstUnAccèsRéservéAuxTechniciens()
+                && !porte.EstUnAccèsRéservéAuxAdmins()
+                && lecteur.peutOuvrir(badgeZone, zone.getZone())
+                && !lecteur.VérifierSiJourActuelEstBloqué()
+                && !porte.EstBloquée()
+                && !zone.EstBloquée()
+                && (porte.EstDansPlageHoraire() || aBadgé && !lecteur.badgeBloqué());
     }
 }
