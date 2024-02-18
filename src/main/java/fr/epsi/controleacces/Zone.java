@@ -5,7 +5,8 @@ import fr.epsi.controleacces.utilities.ZoneInterface;
 
 public class Zone implements ZoneInterface {
     private final PorteInterface[] _portes;
-    private String _zone = "A";
+    private String _zone;
+    private boolean _bloquée = false;
 
     public Zone(String zone, PorteInterface... portes) {
         _zone = zone;
@@ -20,5 +21,14 @@ public class Zone implements ZoneInterface {
     @Override
     public String getZone() {
         return _zone;
+    }
+
+    public void IntervertirBloquéDébloqué() {
+        _bloquée = !_bloquée;
+    }
+
+    @Override
+    public boolean VerifierSiZoneEstBloquée() {
+        return _bloquée;
     }
 }

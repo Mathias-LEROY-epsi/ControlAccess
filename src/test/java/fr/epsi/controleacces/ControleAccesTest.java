@@ -713,4 +713,35 @@ public class ControleAccesTest {
         // ALORS la porte s'ouvre
         assertEquals(1, porteSpy.VérifierOuvertureDemandée());
     }
+
+    @Test
+    void CasZoneBloquéeBadgeUtilisateur() {
+        // ETANT DONNE un lecteur relié à une zone qui regroupe des portes
+        var horloge = new Horloge();
+        horloge.DefinirHeureActuelle(12);
+
+        var calendrier = new Calendrier();
+        calendrier.InitialisationDesJoursBloqués();
+
+        // ET que cette zone est bloquée
+        var porteFake = new PorteFake(horloge);
+        var porteSpy = new PorteSpy(porteFake);
+
+        var porteFake2 = new PorteFake(horloge);
+        var porteSpy2 = new PorteSpy(porteFake2);
+
+        var badge = new Badge("Utilisateur");
+        var zone = new Zone("A", porteSpy, porteSpy2);
+        zone.IntervertirBloquéDébloqué(); // zone bloquée
+        var lecteurFake = new Lecteur(badge, calendrier, zone);
+
+        // QUAND un badge utilisateur est présenté
+        lecteurFake.VerifierLeGradeDuBadge(badge);
+        lecteurFake.simulerDétectionBadge(badge);
+        MoteurOuverture.InterrogerLecteurs(lecteurFake);
+
+        // ALORS aucune porte ne s'ouvre
+        assertEquals(0, porteSpy.VérifierOuvertureDemandée());
+        assertEquals(0, porteSpy2.VérifierOuvertureDemandée());
+    }
 }
