@@ -18,38 +18,39 @@ cd ControleAcces
 
 # Explication des fonctionnalités
 
-## 1. Les Zones
+## 1. Les Badges
 
-Les zones regroupent des portes. On peut bloquer ou débloquer une zone. Une zone bloquée ne peut pas être ouverte.
+On peut bloquer ou débloquer un badge. Un badge bloqué ne peut pas ouvrir les portes.
+On peut affecter un badge à une zone. Un badge affecté à une zone peut ouvrir les portes de cette zone.
+On peut définir un grade à un badge.Cela permet de définir le niveau de permissions au sein du bâtiment.
 
-## 2. Les Plages horaires
-
-Les plages horaires permettent de définir des heures de début et de fin.
-Durant ces heures, les portes s'ouvriront peut importe si on a un badge ou non (non visiteur).
-En dehors de cette plage horaire, les portes ont besoin d'un badge pour s'ouvrir.
-
-## 3. Les Jours de la semaine
-
-On peut définir quels jours de la semaine sont bloqués. Par défaut, seul le week-end est bloqué.
-Cela signifie que seul les admins et les techniciens peut ouvrir les portes pendant un jour bloqué.
-
-## 4. Les Portes
+## 2. Les Portes
 
 Les portes peuvent être bloquées ou non. Une porte bloquée ne peut pas être ouverte.
 Certaines portes ont un accès restreint.
 Cela veut dire que seul les personnes possèdant un badge avec le grade correspondant peuvent ouvrir la porte.
 
-## 5. Les Lecteurs
+## 3. Les Lecteurs
 
 Les lecteurs sont liés à des portes. Ils permettent de lire les badges et d'ouvrir les portes.
 Ils vérifient le grade du badge, ainsi que son état (bloqué ou non).
 Ils vérifient aussi si le badge peut ouvrir une porte dans une zone, en fonction de son niveau de grade.
 
-## 6. Les Badges
+## 4. Les Plages horaires
 
-On peut bloquer ou débloquer un badge. Un badge bloqué ne peut pas ouvrir les portes.
-On peut affecter un badge à une zone. Un badge affecté à une zone peut ouvrir les portes de cette zone.
-On peut définir un grade à un badge.Cela permet de définir le niveau de permissions au sein du bâtiment.
+Les plages horaires permettent de définir des heures de début et de fin.
+Durant ces heures, les portes s'ouvriront peut importe si on a un badge ou non (non visiteur).
+En dehors de cette plage horaire, les portes ont besoin d'un badge pour s'ouvrir.
+
+## 5. Les Jours de la semaine
+
+On peut définir quels jours de la semaine sont bloqués. Par défaut, seul le week-end est bloqué.
+Cela signifie que seul les admins et les techniciens peut ouvrir les portes pendant un jour bloqué.
+
+## 6. La maintenance
+
+On peut définir une plage horaire pour la maintenance. Durant cette plage horaire, les portes sont bloquées pour tout le
+monde sauf les techniciens.
 
 ## 7. Les Grades
 
@@ -80,84 +81,6 @@ Ils ne peuvent pas non plus accéder à une porte en maintenance.
 Ils n'ont ni accès aux portes, ni aux zones. Ils peuvent seulement accéder à l'accueil.
 Ils ne peuvent pas accéder aux portes durant la maintenance, ni en dehors des heures d'ouverture (plage horaire).
 
-# Use Cases
+## 8. Les Zones
 
-1: ✅ ETANT DONNE un lecteur lié à une porte  
-ET QU'UN badge est présenté  
-QUAND ce lecteur est interrogé  
-ALORS cette porte s'ouvre
-
-2: ✅ ETANT DONNE un lecteur lié à une porte  
-QUAND aucun badge n'est présenté  
-ET que ce lecteur est interrogé  
-ALORS la porte ne s'ouvre pas
-
-3: ✅ ETANT DONNE un lecteur lié à deux portes  
-QUAND un badge est présenté  
-ET que ce lecteur est interrogé  
-ALORS les portes s'ouvrent
-
-4: ✅ ETANT DONNE un lecteur lié à une porte  
-QUAND un badge bloqué est présenté  
-ET que ce lecteur est interrogé  
-ALORS cette porte ne s'ouvre pas
-
-5: ✅ ETANT DONNE un lecteur lié à une porte  
-QUAND un badge est bloqué puis débloqué est présenté  
-ET que ce lecteur est interrogé  
-ALORS cette porte s'ouvre
-
-6: ✅ ETANT DONNE un lecteur lié à une porte  
-QUAND un badge est présenté  
-ET que le lecteur n'est interrogé  
-ALORS la porte ne s'ouvre pas
-
-7: ✅ ETANT DONNE plusieurs lecteurs lié à une porte  
-QUAND un badge est passé devant le deuxième lecteur  
-ET que ces lecteurs sont interrogés  
-ALORS la porte est déverrouillée
-
-8: ✅ ETANT DONNE plusieurs lecteurs lié à leur porte  
-QUAND un badge est passé devant le deuxième lecteur  
-ET que ces lecteurs sont interrogés  
-ALORS seule la deuxième porte s'ouvre
-
-9: ✅ ETANT DONNE un lecteur lié à une porte  
-QUAND un badge est présenté  
-ET que le lecteur est interrogé deux fois  
-ALORS la porte ne s'ouvre qu'une fois
-
-10: ✅ ETANT DONNE une porte bloquée  
-QUAND un badge est présenté  
-ET que le lecteur est interrogé  
-ALORS la porte ne s'ouvre pas
-
-11: ✅ ETANT DONNE un lecteur relié à deux portes dont une bloquée  
-QUAND un badge est présenté  
-ET que le lecteur est interrogé  
-ALORS seule la porte bloquée ne s'ouvre pas
-
-12: ✅ ETANT DONNE un lecteur relié à une porte  
-ET QUE l'heure actuelle est dans la plage horaire  
-QUAND le lecteur est interrogé  
-ALORS la porte s'ouvre
-
-13: ✅ ETANT DONNE un lecteur relié à une porte  
-ET QUE l'heure actuelle est dans la plage horaire  
-QUAND le badge est bloqué  
-ALORS la porte s'ouvre
-
-14: ✅ ETANT DONNE un lecteur relié à une porte  
-ET que le lecteur est interrogé un jour de la semaine (hors week-end)  
-QUAND un badge est présenté  
-ALORS la porte s'ouvre
-
-15: ✅ ETANT DONNE une porte bloquée  
-ET que le lecteur est interrogé  
-QUAND un badge administrateur est présenté  
-ALORS la porte s'ouvre
-
-16: ✅ ETANT DONNE un lecteur relié à une porte  
-ET que toutes les portes sont fermées de 23h à minuit (maintenance)  
-QUAND un badge est présenté  
-ALORS la porte ne s'ouvre pas
+Les zones regroupent des portes. On peut bloquer ou débloquer une zone. Une zone bloquée ne peut pas être ouverte.
